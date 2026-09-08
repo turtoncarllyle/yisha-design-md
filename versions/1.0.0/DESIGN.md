@@ -1,7 +1,7 @@
 ---
 version: "1.0.0"
 name: "YiSha Design System"
-description: "Source-derived design rules for consistent YiSha administration interfaces."
+description: "Source-derived YiSha interface rules with explicit evidence, integration contracts, and verification boundaries."
 colors:
   content_primary: "#1ab394"
   content_primary_hover: "#18a689"
@@ -9,6 +9,7 @@ colors:
   shell_logo: "#367fa9"
   shell_sidebar: "#2f4050"
   shell_sidebar_active: "#293846"
+  shell_sidebar_text: "#a7b1c2"
   page_background: "#f3f3f4"
   surface: "#ffffff"
   border: "#e7eaec"
@@ -18,6 +19,11 @@ colors:
   info: "#23c6c8"
   warning: "#f8ac59"
   danger: "#ed5565"
+  input_border: "#e5e6e7"
+  validation_background: "#fbe2e2"
+  validation_border: "#c66161"
+  layer_confirm: "#1e9fff"
+  date_selected: "#009688"
 typography:
   font_family: '"Microsoft YaHei", "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif'
   modern_font_family: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif'
@@ -28,474 +34,450 @@ typography:
 
 # YiSha Design System
 
+[English](DESIGN.md) | [简体中文](DESIGN.zh-CN.md) | [Audit](AUDIT.md) | [Source Manifest](SOURCE-MANIFEST.json)
+
 ## 1. Overview
 
-YiSha is a compact, work-oriented administration interface built around Bootstrap 3, jQuery, server-rendered Razor pages, and a small first-party JavaScript API. Its visual identity comes from three related layers:
+### 1.1 Purpose and use
 
-1. A blue header and dark collapsible sidebar form the default application shell.
-2. Teal `#1ab394` is the primary action color inside list, form, table, and utility pages.
-3. The sign-in page and operations dashboard use a newer deep-green `#0f8b72` accent with stronger typography and restrained 8px surfaces.
+Use this specification to generate or review compact YiSha administration lists, forms, trees, detail screens, the iframe shell, authentication, and operational overview pages. It records visual composition and the integration contracts that keep visually similar controls from behaving differently.
 
-Keep these layers distinct. Do not recolor the complete shell teal, and do not apply the sign-in page's large type and deep shadows to dense CRUD pages.
+Select a version, read this complete file, identify the nearest page pattern in section 8, and preserve the host application's routes, permissions, response fields, and callbacks. For a standalone visual implementation, retain these patterns but explicitly mark missing business contracts; do not invent working endpoints or permission rules.
 
-This file describes visual outcomes, component composition, interaction states, and responsive behavior. It does not replace Bootstrap, plugin, routing, permission, or backend API documentation.
+The English edition is canonical; the Chinese edition has equivalent rules. `1.0.0` identifies this documentation, not an upstream YiSha version. This audit updates the existing `versions/1.0.0` files on `main` without upgrading dependencies or changing the version number. The existing `v1.0.0` tag and Release attachments remain the first-release snapshot. Use Git history and a pinned commit to identify an exact documentation revision; do not assume those historical attachments contain this update.
+
+### 1.2 Evidence vocabulary and non-goals
+
+- **F (Source fact):** present in an audited view, first-party implementation, or configuration.
+- **D (Dependency behavior):** inherited from the vendored version, subject to page options and the CSS cascade.
+- **R (Required improvement for new work):** a recommendation in this specification, not a claim that legacy pages already implement it.
+- **U (Unverified):** requires runtime, deployment, or provenance evidence not available in this static audit.
+
+Unmarked source descriptions below are F or D as identified by their evidence reference. Imperatives preserve those contracts; additions beyond the source carry R. This document does not replace backend/API documentation, provide application source, certify accessibility or security, or define a new component library. No business system, database, or browser UI was run for this release.
 
 ## 2. Source Baseline
 
-The specification was derived from a .NET 10 MVC Web frontend snapshot. The static audit covered:
+### 2.1 Snapshot and traceability
 
-- 50 Razor files across application views, shared layouts, and three functional areas.
-- Shared full-shell, list-page, white-form, and gray-form layouts.
-- First-party `style.css`, `skins.css`, `yisha.css`, `login.css`, and their generated bundles.
-- First-party page, data, initialization, table, tree-table, and zTree JavaScript adapters.
-- Page-level styles used by sign-in, dashboard, skin picker, account, import, tree, and detail screens.
-- All dependency entries in `bundleconfig.json`.
+The baseline is the supplied YiSha ASP.NET Core MVC Web snapshot. It has no local Git metadata identifying an upstream tag. The [upstream project](https://github.com/liukuo362573/YiShaAdmin) is attribution, not proof that its current default branch matches this snapshot. Do not mix in upstream-latest behavior.
 
-### Runtime UI stack
+The static inventory contains 50 Razor files: 38 application views, 5 shared layout files, 5 Razor context files, and 2 area partials. It also records 17 Web controllers for routing/data contracts, all first-party CSS/JS, 41 bundle definitions, their inputs/outputs, and directly referenced resources. The manifest identifies 219 files by relative path, role, byte length, and SHA-256; it does not redistribute contents. It cannot prove byte identity with the undocumented source snapshot used for `1.0.0`.
 
-| Capability | Source dependency | Contract |
+Evidence paths below are relative to the supplied Web root, not links to files in this documentation repository. A `:number` suffix is a one-based line in the captured snapshot. The audit contains the complete Razor coverage matrix.
+
+| Evidence | Relative source path and responsibility |
+| --- | --- |
+| E01 | `Views\Shared\_Layout.cshtml:1`, `_Index.cshtml:1`, `_Form.cshtml:1`, `_FormWhite.cshtml:1`, `_FormGray.cshtml:1`: hosts, imports, body classes, load order. |
+| E02 | `wwwroot\yisha\css\style.css:1`: base typography, controls, shell and inherited template styles. |
+| E03 | `wwwroot\yisha\css\skins.css:7`: skin selectors and sidebar themes. |
+| E04 | `wwwroot\yisha\css\yisha.css:1`: final shared overrides, lists, validation, selection and loaders. |
+| E05 | `wwwroot\yisha\css\login.css:5`, `Views\Home\Login.cshtml:1`: sign-in presentation and flow. |
+| E06 | `Views\Home\Index.cshtml:19`, `wwwroot\yisha\js\yisha-index.js:1`: shell markup and tab management. |
+| E07 | `Views\Home\Skin.cshtml:1`: ten selectable skin/sidebar combinations. |
+| E08 | `wwwroot\yisha\js\yisha.js:6`: dialogs, requests, messages, loading, selection and export helpers. |
+| E09 | `wwwroot\yisha\js\yisha-plugin.js:1`: data binding, selects, tree selects and choice groups. |
+| E10 | `wwwroot\yisha\js\yisha-init.js:1`: shared ready handlers, toolbar authority and validation names. |
+| E11 | `wwwroot\yisha\js\yisha-jquery-bootstrap-table-plugin.js:16`: grid contract. |
+| E12 | `wwwroot\yisha\js\yisha-jquery-bootstrap-treetable-plugin.js:1`, `yisha-jquery-ztree-plugin.js:1`: hierarchy adapters. |
+| E13 | `Areas\OrganizationManage\Views\User\UserIndex.cshtml:1`: split tree/list, filters, toolbar, CRUD, import/export. |
+| E14 | `Areas\OrganizationManage\Views\User\UserForm.cshtml:1`, `ChangeUser.cshtml:1`, `UserDetail.cshtml:1`, `ChangePassword.cshtml:1`, `ResetPassword.cshtml:1`: account forms. |
+| E15 | `Areas\OrganizationManage\Views\User\UserImport.cshtml:1`, `UserPortrait.cshtml:1`: upload and crop workflows. |
+| E16 | `Areas\SystemManage\Views\Menu\MenuForm.cshtml:1`, `MenuChoose.cshtml:1`, `MenuIcon.cshtml:1`, `Areas\SystemManage\Views\Role\RoleForm.cshtml:1`: menu/permission editing. |
+| E17 | `Areas\SystemManage\Views\AutoJob\AutoJobForm.cshtml:1`, `AutoJobIndex.cshtml:1`: job configuration and Cron preview. |
+| E18 | `Views\Home\Welcome.cshtml:1`, `Areas\ToolManage\Views\Server\ServerIndex.cshtml:1`: dashboard and server monitor. |
+| E19 | `Views\Home\NoPermission.cshtml:1`, `Views\Home\Error.cshtml:1`: exception boundaries. |
+| E20 | `bundleconfig.json:1`: bundle inventory; implementation versions are in the corresponding input file headers. |
+| E21 | `wwwroot\lib\bootstrap.table\1.12.0\extensions\mobile\bootstrap-table-mobile.js:1`: mobile card-view switching. |
+| E22 | `wwwroot\lib\layer\3.1.1\theme\default\layer.css:73`, `wwwroot\lib\laydate\5.0.9\theme\default\laydate.css:2`: independent popup styles. |
+| E23 | `Startup.cs:128`, `appsettings.json:1`, Web controllers listed in the manifest: area routes and virtual-directory context. |
+| E24 | `Areas\SystemManage\Views\Area\AreaIndex.cshtml:92`, `Areas\SystemManage\Controllers\AutoJobLogController.cs:1`: incomplete source workflows. |
+
+### 2.2 Actual dependency boundary
+
+Directory labels are not authoritative versions. Keep the existing asset paths, but use the declared implementation version when reasoning about behavior. This table is not a dependency-upgrade request. E01/E20 and the paths below are the evidence.
+
+| Capability | Audited implementation | Loading and boundary |
 | --- | --- | --- |
-| DOM and events | jQuery `2.1.4` | Required by the shell, forms, plugins, and `ys.*` helpers. |
-| Layout and controls | Bootstrap `3.3.7` | Use its 12-column grid, forms, buttons, dropdowns, labels, badges, and pagination. |
-| Icons | Font Awesome `4.7.0` | Use `fa` classes; do not mix in a second icon family on an existing page. |
-| Dialogs and feedback | Layer `3.1.1` | Used behind dialog, message, confirmation, loading, and alert helpers. |
-| Date input | Laydate `5.0.9` | Use for date and date-range fields; the existing green theme is `molv`. |
-| Data grids | Bootstrap Table `1.12.0` | Standard list paging, selection, sorting, mobile adaptation, and localized labels. |
-| Tree grids | Bootstrap TreeTable `1.0` | Hierarchical tabular records with expand and collapse actions. |
-| Tree selection | zTree v3 | Departments, menus, areas, and permission selection. |
-| Enhanced selects | Select2 `4.0.6` | Use only where search or multi-selection is required. |
-| Checkbox and radio | iCheck `1.0.2` | Initialized with the blue checkbox and radio skin. |
-| Validation | jQuery Validation `1.14.0` | Inputs require stable `id` and generated `name` attributes. |
-| Uploads | File Input `5.0.3`, Cropbox `1.0`, Image Upload `1.0` | File import, image preview, and portrait cropping. |
-| Charts | Vendored ECharts build | Reserved for dashboard and report surfaces. |
+| DOM | jQuery `2.1.4` | Shared; its bundle also includes BlockUI `2.7`, Cookie `1.4.1`, Fullscreen `1.2`. |
+| Grid and base controls | Bootstrap `3.3.7` | Shared 12-column grid; JS bundle also includes `bootstrap.dropdown.js`. Do not load Bootstrap `4.0.0` from the vendor directory. |
+| Application icons | Font Awesome `4.7.0` | Shared `fa` classes. Bootstrap Glyphicons remain a dependency exception, including the sign-in checkbox glyph. |
+| Dialog/message | Layer `3.1.1` | Shared desktop implementation behind `ys.*`; mobile sizing in the helper does not load Layer's separate mobile implementation. |
+| Date/time | Laydate `5.0.9` | List/form hosts; page-specific `laydate.render`. No blanket `molv` theme or automatic range linkage. |
+| Record grid | Bootstrap Table `1.12.0` | List host; bundle includes mobile extension, Chinese locale and `ysTable`. |
+| Hierarchical grid | Bootstrap TreeTable directory `1.0` | Department, menu and area pages; bundle includes `ysTreeTable`. |
+| Hierarchical selection | zTree `3.5.18` | `wwwroot\lib\zTree\v3\js\jquery.ztree.all-3.5.js:3`; Metro theme, form host and user list; bundle includes `ysTree`. |
+| Enhanced select | Select2 `4.0.7` | File header at `wwwroot\lib\select2\4.0.6\js\select2.js:2`; directory says `4.0.6`. `ysComboBox` uses Select2 even for ordinary single selection. |
+| Checkbox/radio | iCheck `1.0.2` | Form host, `icheckbox-blue` / `iradio-blue`. Not the login checkbox implementation. |
+| Validation | jQuery Validation `1.14.0` | Form host and login; extension methods and Chinese messages are bundled. |
+| File import | File Input `5.0.4` | Header at `wwwroot\lib\fileinput\5.0.3\js\fileinput.js:2`; directory says `5.0.3`. Only the user import page loads it. |
+| Portrait | Cropbox directory `1.0` | Only the portrait page; do not infer an upstream tag from the directory alone. |
+| Charts | ECharts `4.5.0` | `wwwroot\lib\report\echarts\echarts.js:27406`; dashboard bundle also includes `china.js`, but the audited dashboard has no map. |
+| Split panes | jQuery Layout `1.4.4` | User list's department pane, not a universal shell layout. |
+| Shell navigation | MetisMenu `1.1.3`, SlimScroll `1.3.8` | Shared shell imports; `4px` scroll rail. |
 
-SmartWizard `4.0.1`, jQuery UI `1.12.1`, jQuery Layout `1.4.4`, Highlight `9.13.1`, and Bootstrap Tags Input `0.8.0` are bundled capabilities. Load and use them only when the target page already requires that interaction; their presence is not permission to decorate every screen.
+Of 41 configured bundle outputs, 30 are referenced by views and 11 are not. The latter cover SmartWizard `4.0.1`, jQuery UI `1.12.1`, Highlight `9.13.1`, Image Upload directory `1.0`, Peity `3.3.0`, and Tags Input `0.8.0`. They are not evidence of existing wizard, editor, tag-entry, or miniature-chart pages. Bootstrap `4.0.0`, Summernote, Lightbox2, jQuery context-menu, additional table extensions and extra locale files are vendored, not wired into the audited pages.
+
+### 2.3 Load order, scope and assets
+
+E01/E20: base Bootstrap and Font Awesome precede the first-party style bundle; plugin/page styles follow where their host renders them; final `yisha.css` overrides are emitted near the end of the body. `style.min.css` concatenates `animate.css`, `style.css`, then `skins.css` with minification disabled. Their comment/whitespace-normalized contents match the supplied bundle. This is not proof of runtime equivalence for every minified JS bundle.
+
+The bundling helper emits inputs in debug builds and the configured output otherwise. Do not include an adapter again when its table/tree bundle already contains it. Page ready handlers are registered before the final shared initializer; initialization order matters for populated selects and generated names. A parent body's skin classes do not cross an iframe boundary. Popups belong to the document where their plugin is invoked.
+
+E05/E15/E20: retain the existing login bitmap at `wwwroot\image\login-background.jpg`, avatar assets, local Font Awesome/Glyphicons font files, iCheck sprites, zTree images, Laydate font and import workbook when working in the host project. The documentation does not include those assets. Font Awesome fonts use SIL OFL `1.1`, its CSS uses MIT; Bootstrap uses MIT; ECharts uses Apache `2.0`; File Input uses BSD-3-Clause. Check each distributed header/license before redistribution. Image, avatar and site-icon rights were not independently established. This repository's MIT license covers its original documentation, not blanket rights to upstream media or plugins.
 
 ## 3. Design Principles
 
-### 3.1 Dense and operational
+### 3.1 Three visual layers
 
-- Optimize for scanning, filtering, selecting, and repeated actions.
-- Keep body text at 12px and most control labels at 12-14px.
-- Place related filters in one compact search surface and actions in a nearby toolbar.
-- Prefer tables and trees over card collections for record management.
+Keep the default blue header/dark sidebar, teal CRUD content, and deep-green authentication/dashboard accents distinct. A selected shell skin is not a recoloring instruction for buttons inside iframes. `theme-dark` means a dark sidebar, not a full dark mode. Authentication, dashboard and permission-denied screens are scoped exceptions to the legacy density.
 
-### 3.2 Hierarchy through structure
+### 3.2 Dense operational composition
 
-- Use the dark sidebar, blue header, white content surfaces, borders, and spacing to create hierarchy.
-- Reserve bright colors for actions, selection, status, and small chart series.
-- Keep page backgrounds quiet and content surfaces white.
+Prefer compact tables, filters, adjacent toolbars and horizontal forms for repeated administration. Preserve the existing search/table surfaces, but do not introduce more nested cards, decorative metrics, oversized headings or a marketing layout into CRUD work. Use structure, borders and spacing before adding color or elevation.
 
-### 3.3 Familiar page templates
+### 3.3 Contract before appearance
 
-- List pages use the shared index layout, search area, toolbar, and Bootstrap Table.
-- Edit and detail flows use white or gray form layouts and Bootstrap horizontal forms.
-- Cross-page workflows open in shell tabs; focused edits open in Layer dialogs.
-- Permission and organization relationships use trees or tree tables.
-
-### 3.4 Compatibility first
-
-- Reuse existing class names, layouts, plugin adapters, and `ys.*` helpers.
-- Do not replace one control with a visually similar component that breaks established initialization or response handling.
-- Treat visual modernization as contextual: the sign-in and dashboard treatments are deliberate exceptions, not a global redesign.
+Start from the nearest host and adapter. Preserve control IDs, `col` attributes, permission identifiers, enum values, URL context and parent callbacks. Do not replace jQuery components with visually similar modern controls unless the application migration is explicitly in scope. R: repair semantics and missing state recovery without treating every legacy defect as a visual requirement.
 
 ## 4. Color System and Themes
 
-### 4.1 Core content colors
+### 4.1 Content roles and button states
 
-| Role | Value | Usage |
-| --- | --- | --- |
-| Primary action | `#1ab394` | Primary buttons, search action, selected Select2 chips, progress, focused accents. |
-| Primary hover | `#18a689` | Hover, focus, and active state for the primary action. |
-| Secondary action | `#1c84c6` | Existing `.btn-success`; use for secondary positive or edit actions. |
-| Information | `#23c6c8` | Existing `.btn-info`, informational badges, small highlights. |
-| Warning | `#f8ac59` | Warning buttons, labels, and attention states. |
-| Danger | `#ed5565` | Delete, destructive confirmation, and error status. |
-| Body text | `#676a6c` | Default text on content pages. |
-| Strong text | `#333333` | Filter labels, table headings, and emphasized field content. |
-| Muted text | `#999999` | Secondary metadata and inactive controls. |
-| Page background | `#f3f3f4` | Default gray workspace. |
-| Surface | `#ffffff` | Forms, tables, panels, dropdowns, and cards. |
-| Border | `#e7eaec` | Tables, panels, tabs, and section dividers. |
+E02: classes have project-specific meanings. In the user, role and position toolbars, Add is blue `.btn-success`; Edit and Search are teal `.btn-primary`. Export is often `.btn-warning`, Import `.btn-info`, Delete `.btn-danger`. Choose the nearest page's action mapping, not modern Bootstrap naming assumptions.
 
-Semantic class names follow the source, not modern Bootstrap expectations: `.btn-success` is blue, while the most common affirmative action is `.btn-primary` in teal. Preserve that mapping on existing pages.
+| Class / token | Default | Hover, focus, active | Disabled fill |
+| --- | --- | --- | --- |
+| `.btn-primary` / `content_primary` | `#1ab394` | `#18a689` | `#1dc5a3` |
+| `.btn-success` / `action_secondary` | `#1c84c6` | `#1a7bb9` | `#1f90d8` |
+| `.btn-info` / `info` | `#23c6c8` | `#21b9bb` | `#26d7d9` |
+| `.btn-warning` / `warning` | `#f8ac59` | `#f7a54a` | `#f9b66d` |
+| `.btn-danger` / `danger` | `#ed5565` | `#ec4758` | `#ef6776` |
 
-### 4.2 Default shell
+Bootstrap also applies disabled opacity. `.btn-white` is a white, bordered utility; `.btn-outline` is transparent until hover. These states are styling, not an authorization or duplicate-submission guard.
 
-- Header: `#3c8dbc`.
-- Logo block and darker header hover: `#367fa9`.
-- Dark sidebar: `#2f4050`.
-- Active and hover sidebar row: `#293846`.
-- Default sidebar link: `#b8c7ce` where the skin applies it.
-- Selected blue item: `#1890ff`, with a 3px shell-blue left accent for active top-level navigation.
-- Main workspace: `#f3f3f4` with white content surfaces.
+Content text is `#676a6c`, strong filter/table text `#333333`, muted text commonly `#999999`, page canvas `#f3f3f4`, white surface `#ffffff`, divider `#e7eaec`, table header divider `#cccccc`, normal input border `#e5e6e7`. Search inputs use `#dddddd`. E04 validation uses background `#fbe2e2`, border `#c66161`, entered text `#cc0000`, and error-label text `#ef392b`.
 
-The default class combination is `skin-blue theme-dark`. If a persisted `Skin` cookie exists, apply its skin and side-theme classes instead.
+### 4.2 Shell skin matrix
 
-### 4.3 Alternate shell skins
+E03/E06/E07: default `skin-blue theme-dark`. The `Skin` cookie stores `skin-name|theme-name` for 365 days with path `/`. The picker exposes five skins times two sidebar themes.
 
-| Skin | Header pair | Light-theme selected accent |
-| --- | --- | --- |
-| Blue | `#367fa9` / `#3c8dbc` | `#1890ff` on a pale blue surface. |
-| Green | `#008d4c` / `#00a65a` | `#52c41a` on a pale green surface. |
-| Purple | `#555299` / `#605ca8` | `#722ed1` on `#f9f0ff`. |
-| Red | `#dd4b39` / `#d73925` | Red accent on a pale red surface. |
-| Yellow | `#f39c12` / `#e08e0b` | `#faad14` on `#fffbe6`. |
+| Skin | Header | Logo | Selected fill in dark sidebar | Selected background / text in light sidebar |
+| --- | --- | --- | --- | --- |
+| `skin-blue` | `#3c8dbc` | `#367fa9` | `#1890ff` | `#f0f5ff` / `#2f54eb` |
+| `skin-green` | `#00a65a` | `#008d4c` | `#52c41a` | `#f6ffed` / `#52c41a` |
+| `skin-purple` | `#605ca8` | `#555299` | `#722ed1` | `#f9f0ff` / `#722ed1` |
+| `skin-red` | `#dd4b39` | `#d73925` | `#f5222d` | `#fff1f0` / `#f5222d` |
+| `skin-yellow` | `#f39c12` | `#e08e0b` | `#faad14` | `#fffbe6` / `#faad14` |
 
-`theme-dark` keeps the sidebar at `#2f4050`. `theme-light` uses `#f9fafc`, text near `#777`, a subtle right shadow, and skin-colored active states. A skin changes the shell; it must not remap content action semantics.
+Dark sidebar canvas is `#2f4050`, active ancestry/hover `#293846`, normal `.nav > li > a` text `#a7b1c2`, and selected text white. The inherited `.sidebar a` color `#b8c7ce` does not describe the current `navbar-static-side` markup. Active top-level ancestry uses a `3px` skin-colored border; `.selected` is a distinct state. Light sidebar is `#f9fafc`, ordinary text `#777777`; blue active ancestry text is `#1890ff`, different from selected text `#2f54eb`. Light hover is pale blue even for other skins due to the common selector.
 
-### 4.4 Sign-in and dashboard accent
+The stylesheet also contains `theme-blue` with background `rgba(15,41,80,1)` and text `#a3b1cc`; the picker does not expose it. Treat it as dormant inherited capability, not an eleventh selectable theme. Do not promise that changing a skin recolors Layer, Select2, iCheck, Laydate or ECharts.
 
-- Deep green: `#0f8b72` for focus, chart lines, metric icons, and interaction accents.
-- Ink: `#17202a` or `#17211d` for high-contrast headings and dark action surfaces.
-- Gold: `#f4bd3f` or `#f6c453` for small brand and time accents.
-- Blue support accent: `#2f6fed` for small sign-in labels or secondary illustration details.
-- Dashboard canvas: `#eef2f1`; dashboard borders: `#dce4e0`.
+### 4.3 Scoped colors and cascade
 
-Do not substitute this palette for standard list-page actions. It is scoped to authentication and analytical overview surfaces.
+E05/E18/E19: login/dashboard accent `#0f8b72`; login ink `#17202a`, gold `#f4bd3f`, support blue `#2f6fed`; dashboard ink `#17211d`, canvas `#eef2f1`, border `#dce4e0`, time accent `#f6c453`. The permission page uses ink `#18222f` and gold `#f3c04d`. These are not universal content tokens.
 
-## 5. Typography
+E22: Layer's default confirmation button is `#1e9fff`; Laydate's selected day is `#009688`. E04 overrides Select2 multiple chips to `#1ab394`. E02 `.form-control:focus` sets a teal border with `!important`, so login's later deep-green focus rule does not win that border; its green focus shadow still applies. Judge precedence using importance, selector specificity, load order, and document scope, not the last color mentioned in a file.
 
-### 5.1 Default stack and scale
+## 5. Typography and Content
 
-- Default stack: `"Microsoft YaHei", "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif`.
-- Base size: 12px, weight 400, color `#676a6c`.
-- Use 10-11px only for compact counters, helper labels, or dense metadata.
-- Use 13-14px for navigation, buttons, field emphasis, and common panel titles.
-- Use 16-18px for section titles, dialog headings, and compact dashboard titles.
-- Use 24-30px only for page-level numbers, error states, or dashboard metrics.
+### 5.1 Source scales
 
-### 5.2 Modern authentication and dashboard scale
+E02: `font_family` from the front matter, `12px`, weight `400`, Bootstrap-derived line-height approximately `1.42857`. No webfont download for Open Sans was found in the active layout; it is a fallback name. Ordinary form labels are normal weight. Sidebar links are `13px` / `600`; nested collapsed links `12px`. The shell logo has its own Helvetica-first stack and `16px` size.
 
-Use the system-first stack from the front matter. The sign-in brand may reach 42px, sign-in copy 30px, and dashboard metrics 28px. These sizes belong to spacious first-view surfaces and must not appear inside toolbars, table cells, or dialogs.
+Labels are `10px` with `3px 8px` padding; badges are `11px` with `4px 6px` padding. Ibox titles are around `14px`, `.box-main` titles `16px`, generic box titles `18px`. The `8px`-radius dashboard uses `28px` metric values but still inherits the default font stack, not the login stack.
 
-### 5.3 Text behavior
+E05: login alone uses `modern_font_family`; brand `42px`, supporting headline `30px`, switching to `34px` / `24px` at `880px`. E19 permission title is `30px`, then `24px` at `680px`; its system-first stack omits the explicit Arial fallback. Keep letter spacing `0`. Do not scale fonts continuously with viewport width.
 
-- Letter spacing is `0`; do not apply tight negative tracking.
-- Use normal-weight form labels. Required markers are red and remain adjacent to the label.
-- Use ellipsis only where a stable column or tab width requires it; expose the full value with a title or accessible equivalent.
-- Keep button labels short and task-oriented: Search, Reset, Add, Edit, Delete, Export, Save, Close.
+### 5.2 Content and formatting contracts
+
+E13/E17/E18: list dates use `yyyy-MM-dd`; displayed record timestamps and job datetime inputs use `yyyy-MM-dd HH:mm:ss`. Preserve string IDs, enum-backed status values and response field names. Display status text as well as a badge color. The dashboard's missing update time is `--`; a job's indefinite end sentinel is `9999-12-31 00:00:00`, not a normal user-facing expiry date.
+
+R: distinguish zero, unavailable data and a failed request; do not coerce them all to `0`. Preserve server units/timezone unless the contract supplies conversion rules. Use concise task labels, retain entered text on errors, and expose full long values through wrapping, a detail view or an accessible disclosure. Do not add localization claims: Chinese table/validation/file-input messages are bundled, but a complete application language switch and timezone/number-format policy are not implemented.
 
 ## 6. Layout and Spacing
 
-### 6.1 Application shell
+### 6.1 Shell geometry
 
-| Element | Dimension | Rule |
+E01/E02/E06; dimensions describe the actual `fixed-sidebar` host, not every inherited template class.
+
+| Element | Source dimension / behavior |
+| --- | --- |
+| Expanded navigation | `200px` fixed width; desktop page left margin `200px`. |
+| Collapsed navigation | `50px` width and page offset. Not `65px`. |
+| Collapsed hover flyout | `left:50px`; label at the top, second-level menu `top:40px`, minimum width `140px`. |
+| Header / logo | `50px`; preserve compact account and collapse controls. |
+| Tab strip | `42px`; buttons/tabs `40px` high. |
+| Page wrapper | `0 15px` padding; `.wrapper-content` commonly `20px`. |
+| Iframe content host | Final ordinary `#content-main` rule: `height:calc(100% - 127px); overflow:hidden`. |
+| User list split pane | jQuery Layout west pane `185px`, separate from the shell sidebar. |
+
+The earlier `.mini-navbar li.active .nav-second-level { left:65px; }` is superseded for the fixed-sidebar hover case. Likewise, earlier `#content-main {height:100%}` is not the final ordinary value. More-specific inherited `.fixed-nav` rules still have their own heights, but this is not the default body class. R: verify actual header/tab/iframe bounds when changing the host; do not copy the `127px` subtraction into unrelated layouts.
+
+### 6.2 Lists and forms
+
+E04: `.container-div` uses `10px 35px`; `.search-collapse` / `.select-table` use white, `6px` radius, `10px` top margin, `5px` top / `13px` bottom padding and `1px 1px 3px rgba(0,0,0,.2)` shadow. Filters have `30px` rows, `5px` vertical margins, `15px` right gaps, `280px` ordinary inputs/selects, and `133px` date endpoints. Actual enhanced-select height remains plugin-specific.
+
+E01/E02: use `.form-horizontal`, `.form-group`, `.control-label` and Bootstrap `col-sm-*` splits such as `3 + 8` or `2 + 10`. Standard inputs inherit `34px` height and `6px 12px` padding, with `12px` text and `1px` radius. Forms commonly use `15px` row gaps and `15-20px` surrounding padding. Save/Close belong to the host Layer row or the page's existing form actions.
+
+### 6.3 Scoped page geometry
+
+E05: login shell is at most `960px`, with a `386px` card, `30px` padding, `8px` radius; fields and captcha are `46px` high, submit button `48px`. It uses the real background bitmap with CSS overlays. Reproducing this exception is not permission to add gradients or hero layouts to CRUD pages.
+
+E18: dashboard padding `18px`, gaps `12-14px`, metric cards at least `122px`, panel minimum `322px`, chart height `252px`, metric icon `34px`. E19: permission surface at most `760px`, columns `132px minmax(0,1fr)`, gap `34px`, padding `42px`, radius `8px`. Its explicit content min-width prevents the text column from forcing the grid wider.
+
+## 7. Shape, Elevation and Motion
+
+### 7.1 Radius, borders and shadows
+
+E02/E04/E05/E18/E19: use `1px` input corners, `2-3px` compact controls/dropdowns/loaders, `4px` filters and Bootstrap details, `6px` search/table surfaces and Cron helper, and `8px` scoped login/dashboard/permission surfaces. Avatars are circular. Preserve existing exceptions rather than globally rounding every component.
+
+| Surface | Source treatment |
+| --- | --- |
+| Input, panel, progress | Mostly flat; shared rules suppress default shadows. |
+| `.box` | `3px` top border `#d2d6de`, shadow `0 1px 1px rgba(0,0,0,.1)`; `.box-main` removes both framing effects. |
+| Dropdown | `0 0 3px rgba(86,96,117,.3)`; compact border and padding. |
+| Dashboard | `0 12px 28px rgba(23,33,29,.07)`. |
+| Login | `0 28px 70px rgba(23,32,42,.22)`. |
+| Permission denied | `0 26px 70px rgba(24,34,47,.16)`. |
+| Laydate | `0 2px 4px rgba(0,0,0,.12)`, `2px` corners. |
+
+### 7.2 Stacking and motion boundaries
+
+E02/E04/E08/E22: tree-select mask/panel `99/101`; Select2 dropdown `1051`; fixed sidebar `2001`; Layer JS default base `19891014` plus its index; Laydate CSS `66666666`. These are document-local values, not a coherent global token scale. An iframe cannot escape its parent stacking context by increasing an inner z-index. Diagnose the owning document before changing stacking or `dropdownParent`.
+
+Source motion includes `150ms` input-border transitions, `300ms` logo width, tab scrolling with jQuery animation, a `500ms` menu fade, `200ms` server-panel collapse and a `400ms` infinite loading spinner. E05/E19 also have short hover transitions; inherited animation classes are not requirements for every page. R: preserve layout dimensions during state changes, provide reduced-motion alternatives and readable loading text, and avoid adding ornamental loops or forcing animation on all transitions.
+
+## 8. Components and Page Patterns
+
+### 8.1 Hosts, navigation and tabs
+
+E01/E06: `_Layout` hosts shell/login; `_Index` hosts lists and the dashboard; `_FormWhite` / `_FormGray` wrap `_Form` for transactional pages. `NoPermission` has no shared layout. Never duplicate the application header/sidebar/tab manager in an iframe page.
+
+The shell has nested menus, collapse control, scroll rail, account dropdown and URL-keyed iframe tabs. Preserve the initial home tab, reuse an existing URL, synchronize active ancestry and selected menu, and keep only the active iframe visible. Previous/next tab scrolling, refresh, close-current, close-other and close-all are established commands. Account actions include profile, password, portrait/identity context, skin selection and sign-out; use real controller actions rather than illustrative links.
+
+The account image is `27px`, dropdown width `138px`. Sidebar second/third-level label indents are `52px` / `62px` when expanded. Menu data and authority are supplied by the host; this is not a client SPA router. No current view wires a global breadcrumb bar, sidebar search, mixed top/side layout, right drawer, chat, timeline, rich-text editor or wizard. Inherited CSS or a vendor directory alone does not establish such a component.
+
+### 8.2 Search, toolbar and buttons
+
+E10/E11/E13: filters bind through `col` fields in `#searchDiv`; Enter triggers `#btnSearch`. Search refreshes page `1` and calls `resetToolbarStatus()`. Add/Edit/Delete/Import/Export sit directly above the grid; `.btn-group-sm` / `.btn-sm` are toolbar density and `.btn-xs` is row-action density. The audited lists do not implement a universal Reset-filter command. R: add one only when requested, resetting both widgets and hidden filter values before searching.
+
+Selection events toggle `.disabled` on Delete for zero rows and Edit unless exactly one row is selected. `ys.checkRowEdit` / `ys.checkRowDelete` must still guard the handler; CSS-only disabled appearance is insufficient. Bulk delete confirms the selected count, passes comma-separated IDs, then refreshes on success. R: guard re-entry while pending, retain selection/filters where appropriate after failure, and ensure empty pages after deletion recover to a valid page.
+
+### 8.3 Fields, selects, choices and validation
+
+E09/E10/E14: `getWebControls` reads descendants with `[col]`, not every form field and not ordinary form serialization. `setWebControls` populates controls, but uses HTML insertion for some `DIV`/`SPAN` values. Retain exact `col` field names. Shared code copies IDs to `name` only for text/password/radio inputs and selects; other validated inputs need explicit names. R: encode untrusted display values and give textareas, generated widgets and validation errors explicit associations.
+
+`ysComboBox` generates `id_select` and initializes Select2 for single or multiple selection. Its query option uses `-1` for All; form placeholder uses an empty value. Preserve the configured `dataName`, value/text fields and comma-separated selection representation. Select2 single selection is `28px`; multiple selection minimum `32px`, with wrapping chips. Its ordinary CSS has a `#aaaaaa` border, disabled gray surface and plugin focus states; only selected chip styling is overridden by E04. Do not enforce one global `30px` or `34px` height across all selects.
+
+Choice groups use local helpers and iCheck's blue checked/disabled sprites; source widths and events differ from native checkbox styling. R: retain native labels, checked/disabled semantics and keyboard behavior, and expose indeterminate state if the business contract needs it. Do not substitute a toggle for every enum or radio group.
+
+Validation error labels are absolutely positioned at `right:18px; top:7px; font-size:12px`; grouped choices use a separate offset. That is a source fact, not a guarantee that long errors fit. R: keep messages near fields without covering values, allow wrapping on narrow screens, validate generated selects on change, and keep focus on the first invalid field. Required markers are red and adjacent to the label.
+
+### 8.4 Record tables and pagination
+
+E11/E13/E21: use `ysTable`, not a replacement grid. Defaults: GET, server pagination, `Id` descending, page size `10`, choices `10, 25, 50, 100`, unique key `Id`, `Total` total count and `Data` rows. `getPagination` maps request fields to `pageSize`, `pageIndex`, `sort`, `sortType`; merge filter values through `getWebControls`. Check `Tag == 1`; the adapter reports application errors and non-aborted load failures.
+
+The adapter enables column selection, refresh, card/table toggle and click-to-select. It does not enable a detail-row expander. Preserve each column's visible/sortable/alignment settings and enum formatter. Cells have `8px` padding; Bootstrap Table header inner line-height is `24px` with `8px` padding, so rows are compact but not all a fixed `30px`. Body overflow is automatic; borders use the final shared override. Pagination uses `4px 10px` controls and a light-gray active state.
+
+Every current flat list opts into `data-mobile-responsive="true"`. The mobile extension defaults are otherwise `mobileResponsive:false`, `minWidth:562`, `columnsHidden:[]`; at `562px` or less it switches to card view, not automatically to a curated reduced-column table. Chinese loading/no-match text comes from the bundled locale. R: distinguish an empty successful result from request failure, keep retry reachable, and verify selection/actions after card-view toggles.
+
+### 8.5 Trees, tree selects and tree tables
+
+E12/E13/E16: the user page combines a `185px` department pane with a list; selecting a node sets `DepartmentId` and re-queries. Expand/collapse/refresh operate on the tree, not the table. `ysComboBoxTree` creates `id_input` / `id_tree`; its `data-key` contains comma-separated ancestor IDs and `data-value` a `>`-separated display path. Use `ys.getLastValue` where saving a leaf ID is required.
+
+The two area partials bind `AreaId` through `areaId` and load `SystemManage/Area/GetZtreeAreaListJson`. The form partial takes Bootstrap label/content widths from `ViewData` and sets `expandLevel:0`; the filter partial is an inline query item. Reuse these tree-select partials, not an invented multiselect cascade.
+
+Role permission editing populates the menu tree before applying `MenuIds`, then saves checked IDs as a comma-separated value. Preserve the source parent/child checkbox semantics; do not silently replace them with independent checks or a different authorization model. Menu-choice search uses the existing tree search handler.
+
+Department/menu/area hierarchical grids use `ysTreeTable` and `bootstrapTreeTable`. Ordinary keys are `Id` / `ParentId`; the area grid uses `AreaCode` / `ParentAreaCode`, with `expandColumn:2`. Expansion belongs to the meaningful hierarchy column. A `data-mobile-responsive` attribute on a tree table does not activate Bootstrap Table's mobile extension. R: provide keyboard hierarchy access and controlled horizontal overflow without hiding essential operations. The area source's mismatched table API and missing form must not be copied as valid behavior; see section 14.
+
+### 8.6 Dialogs, feedback and loading
+
+E08/E22: `ys.openDialog` uses Layer type `2` (URL iframe), default width `768px`, unspecified height `$(window).height() - 50` in pixels, maximize/minimize enabled, shade `0.4`, Confirm/Close buttons, and `shadeClose:false`. `ys.openDialogContent` uses type `1` (markup), no title/buttons by default, no maximize/minimize, and `shadeClose:true`. On the helper's user-agent mobile test, dimensions become `auto`; this is separate from CSS breakpoints.
+
+The callback locates the child iframe and calls `saveForm(index)`. On `Tag == 1`, the child invokes its established parent refresh (`searchGrid`, `searchTreeGrid(id)` or `getForm`) and closes the same Layer index. Details, import, crop and skin pages can override title, dimensions or buttons. Do not assume every modal submits a form or every refresh callback has the same name.
+
+The helper passes `fix`, while this Layer version's option is `fixed`; the former does not establish a non-fixed dialog. `btnclass` in alert wrappers is also not evidence that Layer buttons become Bootstrap teal. Confirm closes its prompt before invoking the callback; it does not perform the operation itself.
+
+Success uses `top.layer`, `1000ms`; warning uses local `layer`, `1000ms`; error uses local `layer`, `3000ms`. Alert variants require acknowledgement. Loading is BlockUI plus a `125px` minimum loader, `18px` spinner; closing is delayed `50ms`. R: provide meaningful names/live regions, pending re-entry guards, failure recovery and focus return. Do not assume a one-second toast is sufficient for important information.
+
+### 8.7 Date, import and portrait workflows
+
+E10/E13/E17/E22: actual lists call separate `laydate.render` for start/end with `yyyy-MM-dd`; job fields use `datetime`. The shared `.select-time.length > 10` branch uses `layui.use` and `molv`, but current pages do not meet that condition. It is not active automatic range synchronization. The ordinary picker main width is `272px`, cells `36px` by `30px`, range container `546px`. R: add start/end constraints explicitly when needed and validate chronological order; do not assume changing markup activates the dormant branch.
+
+E15 import is two-stage: File Input accepts `xls/xlsx`, hides preview, uploads to `File/UploadFile`, and stores successful `FilePath`; confirmation calls `ImportUserJson` with that path and `IsOverride`. Preserve the existing template download and overwrite choice. R: clear stale paths after removal/replacement/failure, disable import until upload succeeds, and distinguish upload failure from import failure. Client extensions are not server-side content validation.
+
+E15 portrait editing uses a `400px` crop surface, `200px` crop boundary, and `64/128/180px` previews. Preserve image selection, zoom, crop and explicit save. The blob upload uses `fileList`; the returned path is saved as `Portrait` through `ChangeUserJson`, then the parent's portrait is refreshed. R: handle invalid files, decoding failure, upload failure, cancel and narrow-screen overflow. Fixed source crop geometry is not proof of mobile usability.
+
+### 8.8 Business lists, forms and details
+
+E13/E14/E16/E17/E24 and the manifest: user, position, role, dictionary, dictionary-detail, job and log lists follow the flat-grid pattern. Department, menu and area follow the tree-grid pattern. Preserve dictionary parent IDs when opening detail lists, department/user context, role-menu IDs and each enum's underlying value.
+
+User profile/detail, password/reset, department/position, dictionary/detail and role forms use the form hosts with their own required/read-only fields. API and operation log details display request/result text; R: render untrusted strings as text, wrap long values and distinguish missing values from empty payloads. Do not turn read-only log details into editable fields or invent an AutoJobLog form absent from the supplied views.
+
+Menu form conditionally shows URL, authorization and icon fields for directory/menu/button types. The icon selector is a maximum `200px` scrolling popup; icon choices are `18px`, width `28px`, margin/padding `5px`, radius `3px`, hover `#1d9d74`. All 451 listed icon classes resolve in Font Awesome `4.7.0`. R: retain a keyboard route into/out of the picker and give each class an accessible name; do not add icons from a newer Font Awesome release.
+
+### 8.9 Cron preview and server monitor
+
+E17: job editing includes six Cron presets and a preview helper with `6px` radius, `#f8fbff` background and `#e5edf5` border. Empty input prompts for an expression; pending calculation shows a message; success lists the next five times; application failure uses an error class and text. `GetCronNextRunTimeJson` previews the schedule, not an execution command. Preserve start time and the indefinite-end sentinel. R: reject stale preview responses and distinguish preview from job start/stop/run actions in the job list.
+
+E18: server monitor is separate from the business dashboard. It uses CPU/RAM iboxes and server/.NET property tables, polling raw `$.ajax` every `3000ms`. Collapsing animates for `200ms`; closing removes the panel. Polling does not automatically stop when a panel closes, and no complete error/retry lifecycle is implemented. R: stop timers when leaving the page, avoid overlapping requests and expose unavailable data without showing a global loading mask every three seconds.
+
+### 8.10 Login, dashboard and exceptions
+
+E05: sign-in has account/password/captcha, refreshable captcha, remember-account control, validation, pending submission and response feedback. Keep public branding YiSha; do not reproduce local customization names or default-account hints as production credentials. R: make captcha refresh named and keyboard accessible, preserve account text after failure, and ensure password/captcha handling follows the actual server contract.
+
+E18: dashboard has a dark summary band, six metrics, an activity line chart and a donut breakdown. The active line is one series in `#0f8b72`; the donut radii are `46% / 72%`, palette `#0f8b72`, `#315d95`, `#d89b22`, `#c95746`, `#6d7d73`. Charts resize on window resize. Data loads once, with empty chart containers and an `UpdatedAt` fallback `--`; there is no automatic refresh and `loadDashboard` does not itself check `Tag`. R: handle empty arrays, business errors, request failure and chart disposal explicitly; do not label sample/absent values as live.
+
+E19: permission denied is a standalone `403` screen with semantic main content, a hidden decorative lock, explanation, Back and Home. Back uses history when its length exceeds `1`, otherwise top-level `Home/Index`; Home escapes the iframe. `Home/Error` is only `@ViewBag.Message`, not a designed `404/500` system. R: add runtime error handling only with the real server status/route contract, and never claim a full exception suite from these two views.
+
+## 9. Integration and State Contracts
+
+### 9.1 Requests and permissions
+
+E08: `ys.ajax` wraps jQuery callbacks, JSON requests, a default error alert and loading lifecycle. It does not automatically validate `Tag`, return a complete state machine, prevent repeated submissions or supply cancellation. `success` handlers must check the business response before refresh/close. Uploads use `ys.ajaxUploadFile` with `processData:false` and `contentType:false`. Export posts through `ys.exportExcel`, then navigates to the returned download path on success.
+
+E10/E23: toolbar authority scans `#toolbar a` and `.toolbar a`; IDs plus the current URL feed `top.getButtonAuthority`, yielding identifiers such as `organization:user:add`. `#toolbarPermission` is not included automatically. Client removal is only presentation: preserve server authorization and route contracts. R: use unique IDs and adapt the authority collector deliberately when improving anchors to buttons; otherwise the new controls would evade the old selector.
+
+Routes are area-aware, with `{area:exists}/{controller=Home}/{action=Index}/{id?}` and `{controller=Home}/{action=Index}/{id?}`. `Url.Content` / `ctx` carry deployment context, including the supplied `/admin` virtual-directory setting. Do not hardcode site-root URLs, remove permission checks, or change data schemas to simplify styling.
+
+### 9.2 State coverage and recovery
+
+| State | F / D baseline | R for new work |
 | --- | --- | --- |
-| Expanded sidebar | `200px` | Fixed left navigation on desktop. |
-| Collapsed sidebar | `50px` | Icon rail used by `mini-navbar`. |
-| Collapsed flyout origin | `65px` | Second-level flyouts begin after the icon rail and its spacing. |
-| Header | `50px` | Navigation links have at least 50px height. |
-| Tab strip | `42px` | Inner tab controls are 40px high. |
-| Page offset | `200px` | `#page-wrapper` desktop left margin. |
-| Shell content padding | `0 15px` | Applied to `#page-wrapper`. |
-| General wrapper | `20px` | Standard `.wrapper-content` padding. |
+| Default / hover / active | Source button, menu, dropdown and plugin rules. | Keep state geometry stable and labels readable. |
+| Focus | Teal form border; incomplete custom keyboard semantics. | Visible focus, labels and logical focus order for every command. |
+| Selected / disabled | Table selection, `.disabled`, iCheck/Select2 states. | Enforce disabled behavior and preserve selection contracts. |
+| Loading | Request mask, table locale, iframe loading, Cron message. | Prevent duplicate writes; name the pending operation. |
+| Empty | Table no-match message and dashboard empty containers. | Distinguish no results from unavailable data and retain recovery actions. |
+| Invalid | Validation messages and Cron error state. | Preserve input, associate errors, avoid overlap and focus the first error. |
+| Request / business failure | Default request alert; many page-specific `Tag` checks. | Check both failure channels, unblock controls, keep retry reachable. |
+| Success | Messages, parent refresh, dialog close. | Refresh the correct host only after confirmed success; avoid losing context. |
+| Destructive / bulk | Selection guards and count confirmation. | Prevent re-entry; preserve server authorization; handle partial failure if the API supports it. |
+| Cancel / leave | Layer close and tab removal. | Return focus, release timers/listeners/charts and define unsaved-work handling when needed. |
 
-The shell uses a dark fixed sidebar, a colored top bar, a horizontal scrollable tab strip, and one visible `.admin-iframe` per active tab. Keep the first home tab permanent. New tabs reuse an existing URL instead of opening duplicates.
-
-### 6.2 List pages
-
-- `.container-div`: 10px vertical and 35px horizontal padding, full available height.
-- `.search-collapse` and `.select-table`: white surface, 6px radius, 10px top margin, light `1px 1px 3px rgba(0,0,0,.2)` shadow.
-- Filter row items: 30px high, 5px vertical margin, 15px right separation.
-- Common text/select filter: 280px by 30px.
-- Date-range field: 133px for each endpoint, with a compact separator.
-- Table cell padding: 8px; use `#e7eaec` row borders and `#cccccc` header divider.
-- Keep the filter, toolbar, table, and pagination visually connected as one work area.
-
-### 6.3 Forms
-
-- Use Bootstrap's 12-column grid and `.form-horizontal` for standard dialogs.
-- Common label/content splits are `col-sm-3` + `col-sm-8` or `col-sm-2` + `col-sm-10`.
-- Standard Bootstrap form controls are approximately 34px high with 6px by 12px padding.
-- Use 15-20px panel padding; avoid oversized blank regions in transactional forms.
-- Place Save and Close in the dialog footer or host Layer button row, not in an unrelated floating card.
-
-### 6.4 Dashboard and sign-in
-
-- Dashboard outer padding: 18px; grid gaps: 12-14px.
-- Dashboard cards: 8px radius and 16-18px padding.
-- Sign-in card: 386px wide, 30px padding, 8px radius.
-- Sign-in controls and primary button: 48px high.
-- Keep these layouts spacious, but ensure the next meaningful content remains visible on normal laptop screens.
-
-## 7. Elevation and Shape
-
-### 7.1 Radius scale
-
-- 1px: standard form controls in the legacy content layer.
-- 2-3px: buttons, dropdowns, loaders, compact panels, and shell details.
-- 4px: filters, checkbox outlines, and common Bootstrap controls where already defined.
-- 6px: list search and table surfaces.
-- 8px: sign-in and dashboard cards only.
-- 50%: avatars and circular status or icon controls.
-
-Do not globally normalize everything to 8px. Radius expresses the distinction between dense CRUD surfaces and newer first-view surfaces.
-
-### 7.2 Shadow scale
-
-- Flat: form controls, panels, progress bars, and most content widgets use `box-shadow: none`.
-- Hairline card: `0 1px 1px rgba(0,0,0,.1)` for small `.box` surfaces.
-- List surface: `1px 1px 3px rgba(0,0,0,.2)`.
-- Dropdown: subtle `0 0 3px rgba(86,96,117,.3)` or equivalent.
-- Dashboard: `0 12px 28px rgba(23,33,29,.07)`.
-- Sign-in: stronger `0 28px 70px rgba(23,32,42,.22)` only for the authentication card.
-
-Avoid stacked cards and repeated heavy shadows. One surface boundary is usually enough.
-
-## 8. Components
-
-### 8.1 Header, sidebar, and account menu
-
-- Use Font Awesome icons before navigation labels.
-- Top-level sidebar rows may own nested second- and third-level lists.
-- Active ancestry remains expanded and visually selected when a tab becomes active.
-- The collapse button uses the bars icon; the close affordance appears on very narrow screens.
-- The account menu contains portrait, identity, profile, password, skin, and sign-out actions in a compact dropdown.
-- Preserve the 50px header rhythm; do not add a second toolbar above it.
-
-### 8.2 Tab workspace
-
-- Tabs are 40px controls inside a 42px strip.
-- Provide previous, next, refresh, close-current, close-other, and close-all behavior.
-- The active tab is visually distinct and synchronized back to the sidebar.
-- A tab close icon is secondary and turns danger-colored on hover.
-- Iframes fill the remaining workspace and show a loading state until ready.
-
-### 8.3 Search and toolbar
-
-- Filters sit in `.search-collapse`; use labeled inputs, selects, and date ranges.
-- Search uses the primary teal action. Reset is neutral or white.
-- The toolbar sits immediately above the table and uses small buttons with icons.
-- Add is primary or success-contextual, Edit requires exactly one selected row, and Delete requires one or more selected rows.
-- Disabled actions must look disabled and reject interaction, not merely change color.
-
-### 8.4 Buttons
-
-| Type | Class | Visual role |
-| --- | --- | --- |
-| Primary | `.btn-primary` | Teal create, save, confirm, or search action. |
-| Secondary positive | `.btn-success` | Blue edit, enable, or secondary action in existing screens. |
-| Information | `.btn-info` | Cyan informational or view action. |
-| Warning | `.btn-warning` | Amber reset, pause, or caution action. |
-| Danger | `.btn-danger` | Red delete, revoke, or destructive action. |
-| Neutral | `.btn-white` / default | Close, cancel, or low-emphasis utility. |
-
-Use `.btn-sm` in toolbars and `.btn-xs` inside dense table operation columns. Every icon-only button requires an accessible name or tooltip.
-
-### 8.5 Forms and validation
-
-- Use `.form-control`, `.form-group`, `.control-label`, and Bootstrap grid columns.
-- Required fields show a red marker next to the label.
-- Validation messages are 12px red text positioned near the associated control without covering entered content.
-- Error controls use a pale red background or red border; success must not rely on color alone.
-- Use Select2 only for searchable or multi-value selection. Selected chips use the primary teal.
-- Initialize checkbox and radio controls through iCheck's blue skin where the shared form layout is used.
-- Keep IDs stable because initialization and validation derive behavior from them.
-
-### 8.6 Tables and pagination
-
-- Use Bootstrap Table for sortable, pageable record lists.
-- Table headings use stronger text and a clear bottom divider; rows remain white or lightly striped.
-- Center narrow status, selection, date, and action columns when that improves scanning.
-- Preserve server paging and the response contract expected by the local adapter.
-- Pagination uses white 4px by 10px controls; the active page is light gray, not a large filled pill.
-- Use badges or labels for compact status values, with text that remains meaningful without color.
-
-### 8.7 Trees and tree tables
-
-- Use zTree for menu, department, area, and permission selection.
-- Use Bootstrap TreeTable when hierarchy and record columns must be visible together.
-- Keep expand/collapse controls aligned with the first meaningful column.
-- Provide Expand All / Collapse All only when the hierarchy is large enough to justify it.
-- Tree selection must remain usable by keyboard in new work, even though the legacy adapter does not provide a complete ARIA tree model.
-
-### 8.8 Panels, boxes, and dashboard metrics
-
-- Use `.ibox` / `.ibox-title` / `.ibox-content` or `.box` for bounded content tools.
-- Ibox titles are generally 14px; controls sit at the right edge.
-- Collapsible and closable panels retain visible tool icons and stable content dimensions.
-- Dashboard metrics may use 8px cards, a 34px icon tile, 28px value, and concise 12px supporting text.
-- Do not put a card inside another card or convert every section into a floating tile.
-
-### 8.9 Dialogs, feedback, and loading
-
-- Open focused CRUD forms with `ys.openDialog`; use `ys.openDialogContent` for supplied markup.
-- Use `ys.confirm` before destructive actions.
-- Use `ys.msgSuccess`, `ys.msgWarning`, and `ys.msgError` for brief outcomes.
-- Use alert variants only when acknowledgement is required.
-- Use `ys.showLoading` / `ys.closeLoading` around asynchronous or iframe work.
-- Success messages should be polite status updates; destructive failures should be assertive alerts.
-
-### 8.10 Dates, uploads, portraits, and charts
-
-- Use Laydate for date fields and synchronized start/end ranges.
-- Use File Input for file import with visible file name, progress, success, and failure states.
-- Use Cropbox for portrait cropping; preserve preview, crop boundary, and explicit save/cancel actions.
-- Use ECharts only when a chart makes comparison or trend materially clearer than a table.
-- Dashboard chart colors begin with deep green and may add blue, amber, red, and muted green series.
-
-## 9. Interaction Patterns
-
-### 9.1 First-party helper contract
-
-Prefer the existing helpers when implementing pages in the current application:
-
-- `ys.ajax` for application requests and standard success/error response handling.
-- `ys.ajaxUploadFile` for uploads.
-- `ys.openDialog`, `ys.openDialogContent`, and `ys.closeDialog` for layered workflows.
-- `ys.confirm` for destructive confirmation.
-- `ys.msgSuccess`, `ys.msgWarning`, `ys.msgError` for transient feedback.
-- `ys.alertSuccess`, `ys.alertWarning`, `ys.alertError` for blocking feedback.
-- `ys.showLoading` and `ys.closeLoading` for pending work.
-- `ys.getIds`, `ys.checkRowEdit`, and `ys.checkRowDelete` for selection-aware toolbar actions.
-- `ys.exportExcel` for established export flows.
-- `ys.formatDate`, `ys.isNullOrEmpty`, and related utility methods for existing page conventions.
-
-Do not invent a parallel fetch, modal, or toast layer inside an established page.
-
-### 9.2 Initialization
-
-- Shared initialization wires iCheck, Select2, date ranges, validation names, tree search, and toolbar authority.
-- Table selection enables Delete when at least one row is selected and Edit only when exactly one row is selected.
-- Shell navigation initializes MetisMenu and a 4px SlimScroll rail.
-- The skin picker persists `skin-name|theme-name` in the `Skin` cookie.
-- Every asynchronous action exposes pending, success, empty, and error states.
-
-### 9.3 Motion
-
-- Use 150-300ms transitions for borders, simple transforms, menus, and state changes.
-- Sidebar content may fade over approximately 500ms during collapse transitions because that behavior already exists.
-- Motion must explain state change; avoid decorative bouncing, parallax, or continuous animation.
-- Respect reduced-motion preferences in new CSS.
+These additions do not certify that every existing page already covers every row. Async races, keyboard semantics and disposal remain runtime verification items.
 
 ## 10. Responsive Behavior
 
-### 10.1 Shell and list pages
+### 10.1 Actual boundary matrix
 
-- Below 769px, the shell enters `mini-navbar` behavior.
-- At 768px and below, the fixed sidebar is hidden until explicitly toggled.
-- At 767px and below, dropdown and account-image details compact for narrow layouts.
-- At 350px and below, the collapsed sidebar width becomes 0 and the close control is exposed.
-- The list search surface is hidden below 768px in the source. New pages should provide an explicit filter trigger rather than making filters unreachable.
-- Bootstrap Table's mobile extension may collapse low-priority columns; preserve the primary label and operation path.
+E02/E04/E05/E06/E18/E19/E21. `<=` includes the exact boundary; `<769` is a JavaScript test. Test the iframe's own viewport as well as the top window.
 
-### 10.2 Sign-in
+| Boundary | Source effect / scope |
+| --- | --- |
+| `>=1200px` | Inherited utilities and Bootstrap large grid/container rules; not a new dashboard breakpoint. |
+| `<=1180px` | Dashboard metrics: six columns become three. |
+| `1170px` | Inherited vertical-timeline rules only; no active timeline page. Not a global grid breakpoint. |
+| `<=1000px` | `.welcome-message` hidden; current account/fullscreen menu group uses this class. |
+| `>=992px` | Bootstrap medium grid tier. |
+| `<=880px` | Login becomes one column, maximum `430px`; operations lattice hidden, card padding `24px`, title scales reduced. |
+| `<=820px` | Dashboard header, metrics and analysis panels stack into one column. |
+| `<769px` | Shell load/resize handler adds `mini-navbar` and calls sidebar `fadeIn`; widening does not automatically remove the class. |
+| `<=768px` | CSS hides fixed sidebar and tab strip; script/body classes can make the sidebar visible. Search surface is hidden. |
+| `>=768px` | Bootstrap small grid and floated filter items start. At exactly `768px`, the search surface is still hidden by its other rule. |
+| `<=767px` | Shell dropdown/account-image styling compacts; source-specific dropdown colors apply. |
+| `<=680px` | Permission page: one column, outer padding `18px`, inner padding `28px`, symbol `96px`, title `24px`, full-width actions. |
+| `<=562px` | Opted-in flat tables switch to card view; no automatic curated column hiding. |
+| `<=420px` | Login options and captcha grid stack; captcha image width `118px`. |
+| `<=350px` | Mini sidebar width becomes `0`; narrow navigation close affordance is exposed. |
 
-- At 880px and below, use a single-column shell no wider than 430px and hide the decorative operations lattice.
-- At 420px and below, stack remember-account and default-account content vertically.
-- Keep the form card within the viewport with at least 14px horizontal breathing room.
+### 10.2 Adaptation requirements
 
-### 10.3 Dashboard
+R: do not describe the narrow sidebar as reliably hidden by CSS alone. Test collapse, reload, widening, tab switches and cookie-selected themes together. Keep filters and account actions reachable when their legacy groups disappear, with a deliberate disclosure control where needed. Do not add a universal drawer that the host does not own.
 
-- Above 1180px, metrics use six equal columns.
-- At 1180px and below, metrics use three columns.
-- At 820px and below, the header, metrics, and analytical panels stack into one column.
-- Charts resize with the window and retain a stable explicit height.
+R: on narrow forms, stack Bootstrap label/content columns, constrain plugin popups to the owning viewport, wrap long errors and selection chips, and keep primary actions accessible. Tables/tree tables need controlled overflow or their actual card view, not document-wide clipping. Check fixed crop dimensions and Layer auto sizing before claiming mobile support. Source breakpoints and a static stylesheet audit are not browser acceptance results.
 
-### 10.4 Legacy breakpoints
+## 11. Accessibility and Safety Boundaries
 
-The source also contains Bootstrap-era boundaries at 992px, 1170px, and 1200px for grid and utility visibility. Follow the closest existing page pattern. Do not add viewport-scaled font sizes, and do not create a new breakpoint for a problem that existing grid behavior already solves.
+### 11.1 Existing evidence
 
-## 11. Accessibility
+E01/E06/E10/E19: legacy shared layouts disable zoom, several commands are anchors without native button semantics, custom tab/tree controls lack a complete keyboard model, and iframe titles/focus return are incomplete. The standalone permission page already has `lang="zh-CN"`, a named main region, a real Back button and hidden decorative markup. Retain those positive patterns.
 
-The source is the visual baseline, not a requirement to repeat its accessibility gaps.
+The original palette is not a WCAG conformance claim. White text on the ordinary teal button and pale/colored status combinations needs contrast review; compact `12px` type does not qualify as large text. No screen-reader, keyboard, zoom, contrast-in-context or touch-target acceptance test was performed.
 
-- Keep browser zoom enabled; do not copy viewport settings that disable user scaling.
-- Use real `<button>` elements for commands and real links for navigation.
-- Give icon-only controls an accessible name and visible focus state.
-- Add `aria-expanded` and `aria-controls` to collapsible navigation and panels.
-- Give each workspace iframe a meaningful `title`.
-- Associate labels and validation messages with form controls.
-- Move focus into an opened dialog and return it to the trigger when the dialog closes.
-- Use `role="status"` / `aria-live="polite"` for normal success and progress messages.
-- Use `role="alert"` or assertive live regions only for urgent errors.
-- Do not communicate status by color alone; include text or an icon with an accessible label.
-- Maintain keyboard access for tabs, trees, dropdowns, pagination, and table operations.
-- Treat third-party defaults as a starting point and add missing semantics at the application layer.
+### 11.2 Required improvements for new work
+
+R: enable zoom; use semantic buttons/links; name icon-only actions; associate labels and errors; add visible focus and `aria-expanded` / `aria-controls` for collapsible regions; give each iframe a meaningful title. Dialogs must receive focus, keep keyboard interaction coherent and return focus to the trigger. Tabs, trees, menus, paging and selection need complete keyboard paths, not just hover.
+
+R: use polite status announcements for success/progress and assertive alerts only for urgent failures. Do not rely on color alone. Verify WCAG `2.2` AA contrast and target-size requirements in context; make local accessible variants when needed without globally replacing the brand palette. Support reduced motion and text enlargement, provide chart summaries/data alternatives, and avoid rendering untrusted server text as HTML. These requirements improve the source, not document an already-certified application.
 
 ## 12. Do / Don't
 
-### Do
+### 12.1 Do
 
-- Do start from the shared list, white-form, gray-form, or shell layout.
-- Do keep CRUD pages compact and table-centered.
-- Do use the exact source-derived palette and semantic class mapping.
-- Do preserve the default blue/dark shell unless the user-selected skin says otherwise.
-- Do reuse existing plugin adapters and `ys.*` helpers.
-- Do provide loading, empty, success, validation, permission-denied, and failure states.
-- Do keep modern green styling scoped to sign-in and analytical overview surfaces.
-- Do improve semantics, focus, and keyboard behavior without changing the visual language.
+- Use the correct shared host, local adapters, bundle versions and virtual-directory-aware URLs.
+- Keep the blue/dark shell, teal content and scoped green surfaces separate.
+- Preserve actual Add/Edit color mapping, compact controls and plugin-specific geometry.
+- Distinguish source facts, inherited behavior, recommended improvements and unverified outcomes.
+- Keep permission IDs, `[col]` mappings, response fields, enum values and iframe callbacks intact.
+- Add explicit error recovery, keyboard/focus behavior and pending guards for new work.
 
-### Don't
+### 12.2 Don't
 
-- Don't turn record lists into marketing cards or a decorative bento layout.
-- Don't use oversized headings inside toolbars, dialogs, tables, or sidebars.
-- Don't add gradients, glass effects, large pill controls, or heavy shadows to standard CRUD pages.
-- Don't recolor all semantic actions teal or assume Bootstrap class names have modern meanings.
-- Don't mix icon libraries on one page.
-- Don't place cards inside cards or float every page section above the canvas.
-- Don't duplicate the shell header, sidebar, or tab manager inside an iframe page.
-- Don't bypass permission-aware toolbar initialization.
-- Don't reproduce inaccessible anchors, disabled zoom, missing labels, or silent async failures.
+- Do not derive versions from directory names or load every vendored capability.
+- Do not claim dates auto-link, helpers check every business response, or all skins apply to iframe content.
+- Do not use `65px` as the current fixed-sidebar rail or describe mobile tables as automatic column prioritization.
+- Do not turn CRUD lists into marketing surfaces, duplicate shell chrome or globally normalize radii.
+- Do not introduce another icon/component family; preserve only the existing dependency glyph exceptions.
+- Do not reproduce missing views, duplicate IDs, unsafe HTML insertion, inaccessible controls or silent failures as requirements.
+- Do not claim runtime, security, accessibility or browser acceptance from static document validation.
 
 ## 13. Agent Prompt Guide
 
 ### 13.1 Required context
 
-Before generating UI, determine:
-
-1. Page type: shell, list, form, detail, tree, sign-in, or dashboard.
-2. Host layout and already loaded dependencies.
-3. Existing controller routes, JSON response shape, permission IDs, and helper calls.
-4. Required states: loading, empty, selected, disabled, validation, success, warning, and error.
-5. Responsive priorities and keyboard path.
+Determine the selected specification version, page pattern, host, loaded plugins, route/permission IDs, fields, parent callback, enum/format rules and required states before generating UI. Without the application source, use the self-contained patterns here for visual work and explicitly list unknown business contracts. Do not invent evidence or silently change dependencies.
 
 ### 13.2 Implementation prompt
 
 ```text
-Read DESIGN.md and inspect the nearest existing YiSha page of the same type.
-Implement the requested interface with the existing Bootstrap 3 grid, first-party
-YiSha classes, Font Awesome 4 icons, and ys.* interaction helpers. Preserve routes,
-permission IDs, data contracts, dialog callbacks, and plugin initialization.
-
-Use the default blue/dark shell for application chrome, teal for standard content
-actions, and the deep-green modern treatment only for sign-in or dashboard work.
-Keep CRUD pages compact, table-oriented, and keyboard accessible. Include loading,
-empty, disabled, validation, success, and error states. Do not introduce another
-component library or a new visual language.
+Read the complete YiSha DESIGN.md version 1.0.0 first. Treat source facts,
+dependency behavior, required improvements and unverified items separately.
+Implement the requested page with the documented host, Bootstrap 3 grid,
+Font Awesome 4 icons, local adapters and ys.* helpers. Preserve routes,
+permission IDs, col mappings, response fields, enum values and callbacks.
+Keep shell, CRUD and login/dashboard palettes separate. Follow the actual
+plugin dimensions and breakpoint matrix. Add explicit pending guards,
+failure recovery, keyboard access and focus behavior without inventing
+source capabilities. Report any missing business contract. Static checks
+are not UI acceptance; state exactly what was and was not verified.
 ```
 
 ### 13.3 Review prompt
 
 ```text
-Review this page against DESIGN.md. Check theme role, typography, dimensions,
-spacing, radius, shadow, component choice, ys.* integration, permission-aware
-actions, responsive behavior, focus order, keyboard access, feedback states, and
-text overflow. Report source-contract mismatches before cosmetic preferences.
+Review against YiSha DESIGN.md 1.0.0 and the nearest existing page.
+Prioritize broken data/permission/callback contracts, wrong dependency
+versions, cascade errors and inaccessible or unreachable states before
+cosmetic preferences. Check iframe boundaries, mobile card view, hidden
+filters/account actions, date initialization, upload stages and cleanup.
+Give evidence for each mismatch. Separate source defects from document
+defects and proposed improvements. Do not claim unrun browser tests passed.
 ```
 
-## 14. Known Gaps and Iteration Checklist
+## 14. Known Gaps and Verification Checklist
 
-### Known gaps
+### 14.1 Source limitations not repaired by this release
 
-- The source uses literal CSS values rather than a centralized custom-property token system. Tokens in this document are semantic aliases, not runtime variables.
-- The compact shell/content layer and the newer sign-in/dashboard layer have different type and elevation scales. Their boundary must remain explicit.
-- Several plugins are legacy jQuery components; visual replacement alone is unsafe because pages depend on their events and data shapes.
-- The iframe tab workspace has limited native semantics and requires additional titles, focus management, and keyboard handling in new work.
-- Tree controls do not provide a complete ARIA tree or roving-tabindex model by default.
-- Mobile list filters are hidden by legacy CSS; new work should provide an explicit filter disclosure control.
-- This design version documents one audited snapshot. Re-audit before applying it to a materially different YiSha frontend.
+- Tokens are documentation aliases for literal CSS, not runtime custom properties. No complete dark mode or internationalization system is established.
+- Shared automatic date code is effectively dormant for current pages; loading, error, repeat-submit and cleanup coverage varies by page.
+- Area actions call the wrong table API and an unavailable search method; the expected area form is absent. An AutoJobLog form action likewise lacks its corresponding view. These are source defects, not new document features.
+- Some job/log toolbars reuse `btnDelete`; the permission toolbar is outside the shared collector. UserForm's remark textarea lacks a binding `col`, and ChangeUser's position select uses a differing `dataName`. Preserve the intended business field, not these mistakes.
+- Long validation text, tree-select keyboard behavior, fixed crop geometry, small mobile targets and hidden narrow-screen controls need runtime work. Server polling and Cron preview need lifecycle/race handling.
+- The inactive boxed-layout CSS references a missing pattern image; unreferenced jQuery UI CSS also references missing sprites. Do not present these as failures of active pages, or enable those templates without an asset audit.
+- A matching upstream tag, complete image rights, all minified-JS behavioral equivalence, runtime routes/data and browser accessibility remain U. The source files were not modified by this documentation release.
 
-### Iteration checklist
+### 14.2 Acceptance checklist
 
-- [ ] Select the correct page template and host layout.
-- [ ] Reuse existing dependency versions and helper APIs.
-- [ ] Apply the right color layer: shell, content, or sign-in/dashboard.
-- [ ] Keep base content text and information density compact.
-- [ ] Verify expanded, collapsed, hover, focus, active, selected, disabled, and error states.
-- [ ] Verify loading, empty, success, warning, and failure feedback.
-- [ ] Check 1200px, 992px, 880px, 820px, 769px, 768px, 767px, 420px, and 350px behavior as relevant.
-- [ ] Check text fit, table priorities, dialog bounds, and iframe height.
-- [ ] Check keyboard path, focus visibility, labels, live regions, and non-color status cues.
-- [ ] Confirm no new component library, shell duplication, or visual language was introduced.
+- [ ] Read the selected version and identify the host, page pattern and source snapshot.
+- [ ] Preserve exact dependency implementation versions and avoid duplicate adapter loading.
+- [ ] Check source palette, cascade, dimensions, radius, shadows, stacking and font fallback in the owning document.
+- [ ] Check request fields, `Tag`/`Data`/`Total`, permissions, IDs, `[col]`, enums and parent refresh callbacks.
+- [ ] Check hover, focus, active, selection, disabled, loading, empty, validation, request failure, success, cancel and recovery.
+- [ ] Test applicable boundaries at `1200/1180/1170/1000/992/880/820/769/768/767/680/562/420/350px`, including adjacent widths.
+- [ ] Check text overflow, popup bounds, table/card-view operations, crop usability and iframe height.
+- [ ] Check keyboard, focus return, zoom, contrast, target sizes, reduced motion and live announcements in a real browser when UI changes are made.
+- [ ] Record static checks separately from runtime/browser checks; mark unavailable evidence U.
+- [ ] Keep the specification version `1.0.0`; trace in-place updates through commits and source hashes without moving historical tags or replacing Release attachments.

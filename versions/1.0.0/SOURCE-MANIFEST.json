@@ -1,0 +1,2279 @@
+{
+  "schemaVersion": 1,
+  "specificationVersion": "1.0.0",
+  "capturedDate": "2026-09-08",
+  "sourceRoot": "YiSha MVC Web snapshot",
+  "upstreamTag": null,
+  "scope": "Static source evidence; hashes identify this local snapshot, not an upstream release or runtime validation. Paths are relative to the Web root. Contents are not redistributed.",
+  "excluded": [
+    "Build outputs and intermediate files",
+    "Unreferenced vendor implementations outside the bundle inventory",
+    "Server implementation outside the Web project",
+    "Secrets and source contents"
+  ],
+  "counts": {
+    "razorFiles": 50,
+    "applicationViews": 38,
+    "sharedLayouts": 5,
+    "razorContext": 5,
+    "areaPartials": 2,
+    "controllers": 17,
+    "bundles": 41,
+    "files": 219
+  },
+  "bundles": [
+    {
+      "output": "wwwroot/yisha/css/style.min.css",
+      "inputs": [
+        "wwwroot/yisha/css/animate.css",
+        "wwwroot/yisha/css/style.css",
+        "wwwroot/yisha/css/skins.css"
+      ],
+      "minify": false,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml",
+        "Views/Shared/_Index.cshtml",
+        "Views/Shared/_Layout.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/yisha/js/yisha.min.js",
+      "inputs": [
+        "wwwroot/yisha/js/yisha.js",
+        "wwwroot/yisha/js/yisha-plugin.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml",
+        "Views/Shared/_Index.cshtml",
+        "Views/Shared/_Layout.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/yisha/css/yisha.min.css",
+      "inputs": [
+        "wwwroot/yisha/css/yisha.css"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_FormGray.cshtml",
+        "Views/Shared/_FormWhite.cshtml",
+        "Views/Shared/_Index.cshtml",
+        "Views/Shared/_Layout.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/yisha/js/yisha-init.min.js",
+      "inputs": [
+        "wwwroot/yisha/js/yisha-init.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_FormGray.cshtml",
+        "Views/Shared/_FormWhite.cshtml",
+        "Views/Shared/_Index.cshtml",
+        "Views/Shared/_Layout.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/yisha/js/yisha-index.min.js",
+      "inputs": [
+        "wwwroot/yisha/js/yisha-index.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Layout.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/yisha/js/yisha-data.min.js",
+      "inputs": [
+        "wwwroot/yisha/js/yisha-data.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Home/Index.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/jquery/2.1.4/jquery.min.js",
+      "inputs": [
+        "wwwroot/lib/jquery/2.1.4/jquery.js",
+        "wwwroot/lib/jquery.blockui/2.7/jquery.blockUI.js",
+        "wwwroot/lib/jquery.cookie/1.4.1/jquery.cookie.js",
+        "wwwroot/lib/jquery.fullscreen/1.2/jquery.fullscreen.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml",
+        "Views/Shared/_Index.cshtml",
+        "Views/Shared/_Layout.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/bootstrap/3.3.7/css/bootstrap.min.css",
+      "inputs": [
+        "wwwroot/lib/bootstrap/3.3.7/css/bootstrap.css"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml",
+        "Views/Shared/_Index.cshtml",
+        "Views/Shared/_Layout.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/bootstrap/3.3.7/js/bootstrap.min.js",
+      "inputs": [
+        "wwwroot/lib/bootstrap/3.3.7/js/bootstrap.js",
+        "wwwroot/lib/bootstrap/3.3.7/js/bootstrap.dropdown.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml",
+        "Views/Shared/_Index.cshtml",
+        "Views/Shared/_Layout.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/fontawesome/4.7.0/css/fontawesome.min.css",
+      "inputs": [
+        "wwwroot/lib/fontawesome/4.7.0/css/font-awesome.css"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml",
+        "Views/Shared/_Index.cshtml",
+        "Views/Shared/_Layout.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/layer/3.1.1/layer.min.js",
+      "inputs": [
+        "wwwroot/lib/layer/3.1.1/layer.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml",
+        "Views/Shared/_Index.cshtml",
+        "Views/Shared/_Layout.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/laydate/5.0.9/laydate.min.js",
+      "inputs": [
+        "wwwroot/lib/laydate/5.0.9/laydate.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml",
+        "Views/Shared/_Index.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/jquery.validation/1.14.0/jquery.validate.min.js",
+      "inputs": [
+        "wwwroot/lib/jquery.validation/1.14.0/jquery.validate.js",
+        "wwwroot/lib/jquery.validation/1.14.0/jquery.validate.extend.js",
+        "wwwroot/lib/jquery.validation/1.14.0/localization/messages_zh.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Home/Login.cshtml",
+        "Views/Shared/_Form.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/zTree/v3/css/metroStyle/metroStyle.min.css",
+      "inputs": [
+        "wwwroot/lib/zTree/v3/css/metroStyle/metroStyle.css"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Areas/OrganizationManage/Views/User/UserIndex.cshtml",
+        "Views/Shared/_Form.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/zTree/v3/js/ztree.min.js",
+      "inputs": [
+        "wwwroot/lib/zTree/v3/js/jquery.ztree.all-3.5.js",
+        "wwwroot/yisha/js/yisha-jquery-ztree-plugin.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Areas/OrganizationManage/Views/User/UserIndex.cshtml",
+        "Views/Shared/_Form.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/select2/4.0.6/css/select2.min.css",
+      "inputs": [
+        "wwwroot/lib/select2/4.0.6/css/select2.css"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml",
+        "Views/Shared/_Index.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/select2/4.0.6/js/select2.min.js",
+      "inputs": [
+        "wwwroot/lib/select2/4.0.6/js/select2.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml",
+        "Views/Shared/_Index.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/jquery.layout/1.4.4/jquery.layout-latest.min.css",
+      "inputs": [
+        "wwwroot/lib/jquery.layout/1.4.4/jquery.layout-latest.css"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Areas/OrganizationManage/Views/User/UserIndex.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/jquery.layout/1.4.4/jquery.layout-latest.min.js",
+      "inputs": [
+        "wwwroot/lib/jquery.layout/1.4.4/jquery.layout-latest.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Areas/OrganizationManage/Views/User/UserIndex.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/icheck/1.0.2/skins/custom.min.css",
+      "inputs": [
+        "wwwroot/lib/icheck/1.0.2/skins/custom.css"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/icheck/1.0.2/icheck.min.js",
+      "inputs": [
+        "wwwroot/lib/icheck/1.0.2/icheck.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Form.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/bootstrap.table/1.12.0/bootstrap-table.min.css",
+      "inputs": [
+        "wwwroot/lib/bootstrap.table/1.12.0/bootstrap-table.css"
+      ],
+      "minify": null,
+      "referencedBy": [
+        "Views/Shared/_Index.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/bootstrap.table/1.12.0/bootstrap-table.min.js",
+      "inputs": [
+        "wwwroot/lib/bootstrap.table/1.12.0/bootstrap-table.js",
+        "wwwroot/lib/bootstrap.table/1.12.0/extensions/mobile/bootstrap-table-mobile.js",
+        "wwwroot/lib/bootstrap.table/1.12.0/locale/bootstrap-table-zh-CN.js",
+        "wwwroot/yisha/js/yisha-jquery-bootstrap-table-plugin.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Shared/_Index.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/bootstrap.treetable/1.0/bootstrap-treetable.min.css",
+      "inputs": [
+        "wwwroot/lib/bootstrap.treetable/1.0/bootstrap-treetable.css"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Areas/OrganizationManage/Views/Department/DepartmentIndex.cshtml",
+        "Areas/SystemManage/Views/Area/AreaIndex.cshtml",
+        "Areas/SystemManage/Views/Menu/MenuIndex.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/bootstrap.treetable/1.0/bootstrap-treetable.min.js",
+      "inputs": [
+        "wwwroot/lib/bootstrap.treetable/1.0/bootstrap-treetable.js",
+        "wwwroot/yisha/js/yisha-jquery-bootstrap-treetable-plugin.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Areas/OrganizationManage/Views/Department/DepartmentIndex.cshtml",
+        "Areas/SystemManage/Views/Area/AreaIndex.cshtml",
+        "Areas/SystemManage/Views/Menu/MenuIndex.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/jquery.smartwizard/4.0.1/css/smart_wizard.min.css",
+      "inputs": [
+        "wwwroot/lib/bootstrap/3.3.7/css/bootstrap-theme.css",
+        "wwwroot/lib/jquery.smartwizard/4.0.1/css/smart_wizard.css",
+        "wwwroot/lib/jquery.smartwizard/4.0.1/css/smart_wizard_theme_arrows.css"
+      ],
+      "minify": true,
+      "referencedBy": []
+    },
+    {
+      "output": "wwwroot/lib/jquery.smartwizard/4.0.1/css/smart_wizard.min.js",
+      "inputs": [
+        "wwwroot/lib/jquery.smartwizard/4.0.1/js/jquery.smartWizard.js"
+      ],
+      "minify": true,
+      "referencedBy": []
+    },
+    {
+      "output": "wwwroot/lib/jquery.ui/1.12.1/jquery-ui.min.css",
+      "inputs": [
+        "wwwroot/lib/jquery.ui/1.12.1/jquery-ui.css"
+      ],
+      "minify": true,
+      "referencedBy": []
+    },
+    {
+      "output": "wwwroot/lib/jquery.ui/1.12.1/jquery-ui.min.js",
+      "inputs": [
+        "wwwroot/lib/jquery.ui/1.12.1/jquery-ui.js"
+      ],
+      "minify": true,
+      "referencedBy": []
+    },
+    {
+      "output": "wwwroot/lib/highlight/9.13.1/css/vs.min.css",
+      "inputs": [
+        "wwwroot/lib/highlight/9.13.1/css/vs.css"
+      ],
+      "minify": true,
+      "referencedBy": []
+    },
+    {
+      "output": "wwwroot/lib/jquery.ui/1.12.1/highlight.pack.min.js",
+      "inputs": [
+        "wwwroot/lib/highlight/9.13.1/highlight.pack.js"
+      ],
+      "minify": true,
+      "referencedBy": []
+    },
+    {
+      "output": "wwwroot/lib/cropbox/1.0/cropbox.min.css",
+      "inputs": [
+        "wwwroot/lib/cropbox/1.0/cropbox.css"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Areas/OrganizationManage/Views/User/UserPortrait.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/cropbox/1.0/cropbox.min.js",
+      "inputs": [
+        "wwwroot/lib/cropbox/1.0/cropbox.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Areas/OrganizationManage/Views/User/UserPortrait.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/imageupload/1.0/css/imgup.min.css",
+      "inputs": [
+        "wwwroot/lib/imageupload/1.0/css/imgup.css"
+      ],
+      "minify": true,
+      "referencedBy": []
+    },
+    {
+      "output": "wwwroot/lib/imageupload/1.0/js/imgup.min.js",
+      "inputs": [
+        "wwwroot/lib/imageupload/1.0/js/imgup.js",
+        "wwwroot/lib/imageupload/1.0/js/preview.js"
+      ],
+      "minify": true,
+      "referencedBy": []
+    },
+    {
+      "output": "wwwroot/lib/fileinput/5.0.3/js/fileinput.min.js",
+      "inputs": [
+        "wwwroot/lib/fileinput/5.0.3/js/fileinput.js",
+        "wwwroot/lib/fileinput/5.0.3/js/locales/zh.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Areas/OrganizationManage/Views/User/UserImport.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/fileinput/5.0.3/css/fileinput.min.css",
+      "inputs": [
+        "wwwroot/lib/fileinput/5.0.3/css/fileinput.css"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Areas/OrganizationManage/Views/User/UserImport.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/report/echarts/echarts.min.js",
+      "inputs": [
+        "wwwroot/lib/report/echarts/echarts.js",
+        "wwwroot/lib/report/echarts/china.js"
+      ],
+      "minify": true,
+      "referencedBy": [
+        "Views/Home/Welcome.cshtml"
+      ]
+    },
+    {
+      "output": "wwwroot/lib/report/peity/jquery.peity.min.js",
+      "inputs": [
+        "wwwroot/lib/report/peity/jquery.peity.js"
+      ],
+      "minify": true,
+      "referencedBy": []
+    },
+    {
+      "output": "wwwroot/lib/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.css",
+      "inputs": [
+        "wwwroot/lib/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css",
+        "wwwroot/lib/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput-typeahead.css"
+      ],
+      "minify": true,
+      "referencedBy": []
+    },
+    {
+      "output": "wwwroot/lib/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js",
+      "inputs": [
+        "wwwroot/lib/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.js"
+      ],
+      "minify": true,
+      "referencedBy": []
+    }
+  ],
+  "files": [
+    {
+      "path": "appsettings.Development.json",
+      "roles": [
+        "configuration"
+      ],
+      "bytes": 137,
+      "sha256": "14bf8f849db3f7a958ae8f22cb41475d2c2219ffeab93e357a16c0675142c75a"
+    },
+    {
+      "path": "appsettings.json",
+      "roles": [
+        "configuration"
+      ],
+      "bytes": 896,
+      "sha256": "12a1b2d0cb98c930f724013537a3af0926596b1ea325eef7b3024c83e2116f91"
+    },
+    {
+      "path": "Areas/OrganizationManage/_ViewImports.cshtml",
+      "roles": [
+        "razor-context"
+      ],
+      "bytes": 342,
+      "sha256": "532bb3d0e730410ad86c1b0efef12bd2263054449f5cef3832986a51ad2e2a90"
+    },
+    {
+      "path": "Areas/OrganizationManage/Controllers/DepartmentController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 3551,
+      "sha256": "d0cbd5fd6a4f733ba3ba2c0efe235b2d87ba45485a162974d9e7b1b758e24a10"
+    },
+    {
+      "path": "Areas/OrganizationManage/Controllers/PositionController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 3534,
+      "sha256": "08ca245059a6358ca5b88d8452a5d5186b0d65ecd12033b87ea05fd9967249b2"
+    },
+    {
+      "path": "Areas/OrganizationManage/Controllers/UserController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 6903,
+      "sha256": "d38b3de3e84a90b7011bfd7de8003e67aa67638751c75bf9b099226d7dc7996f"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/Department/DepartmentForm.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 4481,
+      "sha256": "655d8409987e550f4160a48d036fbd028de76528a2622fc98e9585c357b53b67"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/Department/DepartmentIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 4939,
+      "sha256": "8e5b0f1088e3b4c732596adab46d37f1480490011aa212c9913d59d937031f70"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/Position/PositionForm.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 3286,
+      "sha256": "63e8c1f914532f9541e098fa4522bf5a364583b780252e70ff759095f78e702b"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/Position/PositionIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 4102,
+      "sha256": "9349c9141a7fb85bf6328d2d2467af42bfaaa3c20ae18db446e5cad748c19f3d"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/User/ChangePassword.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 3173,
+      "sha256": "1932c5196f61f9bd3de922313687b23ff2db17bd9d97f7074858ccf2a1d991c2"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/User/ChangeUser.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 4323,
+      "sha256": "e16aaa4669e3e540d20699fc20e2fa25aa504b76e8b0f7f45160c6bd0e0d372c"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/User/ResetPassword.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 2223,
+      "sha256": "c532dcf2be055a7b7a17fcf94a0894fb08e555be094ccf77adfbddd70d926358"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/User/UserDetail.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 6765,
+      "sha256": "9fdfcf4036bb60fbb769a029c90158be39c70fef064b680475a7eaf94aa83446"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/User/UserForm.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 5736,
+      "sha256": "3258d6ddd82fb07397ea20e564b129888ccba0e9fe089afc2ab92c1434f50c7e"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/User/UserImport.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 2954,
+      "sha256": "1cd1e0e1615ac52cafcf498feb35e77f7ceadb7125f08c6c209d6bf28d18760f"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/User/UserIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 10368,
+      "sha256": "8bb506a9d8bd2dbaf0a767f6a16bd325c4cf503538de67c569840f2b5d41b9dd"
+    },
+    {
+      "path": "Areas/OrganizationManage/Views/User/UserPortrait.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 5096,
+      "sha256": "729c48fef47b529f8a88a40e04673a0e1a098f8954e421b3575a4a1a84fa54ac"
+    },
+    {
+      "path": "Areas/SystemManage/_ViewImports.cshtml",
+      "roles": [
+        "razor-context"
+      ],
+      "bytes": 347,
+      "sha256": "5a4aa3415863321c0fadb6e96d5005b98cbe5c647b6da53a8155cc232a4030a7"
+    },
+    {
+      "path": "Areas/SystemManage/Controllers/AreaController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 3133,
+      "sha256": "7ba80786b18a70416a1bfbf68594f3b60aeaf8ebbbe0fc4f330c370840d0669b"
+    },
+    {
+      "path": "Areas/SystemManage/Controllers/AutoJobController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 3485,
+      "sha256": "656249dc315dcd848592747dff7450968f3a453c039d51a3346c35aacb89ade5"
+    },
+    {
+      "path": "Areas/SystemManage/Controllers/AutoJobLogController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 2969,
+      "sha256": "3f7e3f92ccdf477cef214f9a4c4da2f8a98b1b315463d1e0515423ffd11b9975"
+    },
+    {
+      "path": "Areas/SystemManage/Controllers/DataDictController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 3446,
+      "sha256": "5a597f638a8ed8b32ef76662c7693e68e6229211f0de64804c2b622d236fe0a7"
+    },
+    {
+      "path": "Areas/SystemManage/Controllers/DataDictDetailController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 3264,
+      "sha256": "5766a649bbb3ef13117f018b9c3543fdc0a78039316f8e5dadff434feb1074bc"
+    },
+    {
+      "path": "Areas/SystemManage/Controllers/LogApiController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 2874,
+      "sha256": "68e60245ab0c48027e27a9c1e543618b6bbbe93ef1217d32b9a65cc3dcd39b83"
+    },
+    {
+      "path": "Areas/SystemManage/Controllers/LogLoginController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 2686,
+      "sha256": "059519ff21688fd34e62da60e1757633e896b80b61a24fa913e8de459f33a086"
+    },
+    {
+      "path": "Areas/SystemManage/Controllers/LogOperateController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 2923,
+      "sha256": "b09a4a932c32ae54555fa962fd56916900d264438b31530d51266da9bef26d8f"
+    },
+    {
+      "path": "Areas/SystemManage/Controllers/MenuController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 3094,
+      "sha256": "db9ad18360dec7065f93efc220d79da9de72a85ccd96c587a9ed32ea4f1571bf"
+    },
+    {
+      "path": "Areas/SystemManage/Controllers/RoleController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 3421,
+      "sha256": "4032bc9faa7dc2ef6536629a5bf6ccde9d2a4944aaf598c8d55ae90dba1e34eb"
+    },
+    {
+      "path": "Areas/SystemManage/Shared/AreaFormPartial.cshtml",
+      "roles": [
+        "area-partial"
+      ],
+      "bytes": 409,
+      "sha256": "5ed6fa831755356c3f7d19b4d21ee003f9d23da0f2ad8541cd6d512b731d0e38"
+    },
+    {
+      "path": "Areas/SystemManage/Shared/AreaIndexPartial.cshtml",
+      "roles": [
+        "area-partial"
+      ],
+      "bytes": 276,
+      "sha256": "98a5a4c4311b5ebeddfebf60518102832e040a15166507887eec6bfb6fefd3f2"
+    },
+    {
+      "path": "Areas/SystemManage/Views/Area/AreaIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 3957,
+      "sha256": "f5a32fa9233ffc4f058a235587c9a97a7d396f25a78b696fe20d7b88f2b00bc7"
+    },
+    {
+      "path": "Areas/SystemManage/Views/AutoJob/AutoJobForm.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 9104,
+      "sha256": "f30f7849076d6b3e7d54d4238d9fc3f601cbfc5037edc1d369c5409bdf241a82"
+    },
+    {
+      "path": "Areas/SystemManage/Views/AutoJob/AutoJobIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 6265,
+      "sha256": "c4d07a6e3ca9aa563c2bb152119927fd4b4884e7639a9ce038f6ae3f26948c67"
+    },
+    {
+      "path": "Areas/SystemManage/Views/AutoJobLog/AutoJobLogIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 3597,
+      "sha256": "cb41e968513bbc2c1395806af416590eda40638e1c72754f3ac50a6a2d8fcc9d"
+    },
+    {
+      "path": "Areas/SystemManage/Views/DataDict/DataDictForm.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 2887,
+      "sha256": "be317f61d22b6719849aa3bb664c9e40a7c76abd9e64eacd8a6e57b3475df0e1"
+    },
+    {
+      "path": "Areas/SystemManage/Views/DataDict/DataDictIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 4883,
+      "sha256": "3c4006059cba4c0e14a65e007bd6d8ccc953df56946bd0353fb0cf32f82822b4"
+    },
+    {
+      "path": "Areas/SystemManage/Views/DataDictDetail/DataDictDetailForm.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 5205,
+      "sha256": "8c6c14bb3e3cbad7dc404ccbb26f1fd69d30ae09c0333b9490591956e92101f7"
+    },
+    {
+      "path": "Areas/SystemManage/Views/DataDictDetail/DataDictDetailIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 5651,
+      "sha256": "abc9ae2bf08fdfeb763cf5c49e791e7200d51d96720868b775ae3012d1eb00be"
+    },
+    {
+      "path": "Areas/SystemManage/Views/LogApi/LogApiDetail.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 2453,
+      "sha256": "b536c89b462df45decadc354d2e2cc1c283b3f47ec38f524d0ce07eb4d604f1e"
+    },
+    {
+      "path": "Areas/SystemManage/Views/LogApi/LogApiIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 6015,
+      "sha256": "5b99b8efc87f45eae43562004c41ec42d80aa75d7b3ae0734209239b9b5e634b"
+    },
+    {
+      "path": "Areas/SystemManage/Views/LogLogin/LogLoginIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 5503,
+      "sha256": "573e929d682e4ec08c54f6a87a17945ca0c4acb3bca205ab9c8650be6f93d4f8"
+    },
+    {
+      "path": "Areas/SystemManage/Views/LogOperate/LogOperateDetail.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 2686,
+      "sha256": "7d0aa2126a2f9590ad816cce95a87daa8b98ca8ff1ddd355fb8713e0dae11d18"
+    },
+    {
+      "path": "Areas/SystemManage/Views/LogOperate/LogOperateIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 6108,
+      "sha256": "59e2d9420179cee1ec1772901e4866d9d794b8f584f632c5d08b67ea8b743cd9"
+    },
+    {
+      "path": "Areas/SystemManage/Views/Menu/MenuChoose.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 1492,
+      "sha256": "afc03d200d4a3ffb2fb6754eb719c797d4eda3db36cbcde4875cc2fb4ef31dc1"
+    },
+    {
+      "path": "Areas/SystemManage/Views/Menu/MenuForm.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 7058,
+      "sha256": "fbdd33a94555dbe6ec3a2c983b10dc6da170207f2a53ab39ef65e2989edcb17d"
+    },
+    {
+      "path": "Areas/SystemManage/Views/Menu/MenuIcon.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 25782,
+      "sha256": "ab5d52780802368fd8390b0dbe8daff5c7c729ed25f410adeaa4c26abe8a14cd"
+    },
+    {
+      "path": "Areas/SystemManage/Views/Menu/MenuIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 7142,
+      "sha256": "b7491774db058de4aed79388d649a85c5e37676b3b04b06656107d39496f9888"
+    },
+    {
+      "path": "Areas/SystemManage/Views/Role/RoleForm.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 3826,
+      "sha256": "73cfca21f238abf927d3fe6c6c0e1d0771968d2496f6b7f462b3db65769a79f7"
+    },
+    {
+      "path": "Areas/SystemManage/Views/Role/RoleIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 5440,
+      "sha256": "08b3bb47996651e56a781e77ed53ca73188fc796e525045d2bd4fe23265c89f0"
+    },
+    {
+      "path": "Areas/ToolManage/_ViewImports.cshtml",
+      "roles": [
+        "razor-context"
+      ],
+      "bytes": 300,
+      "sha256": "e3ff2e9e30502f54122d5cb9217c9d7038d9a505d7fd0cb18cb48c67205064cb"
+    },
+    {
+      "path": "Areas/ToolManage/Controllers/ServerController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 1061,
+      "sha256": "781e7a7324b336d1e30dabc24b1c8c5f90f6202f1bbe8a4ecd4247f3855ba6d6"
+    },
+    {
+      "path": "Areas/ToolManage/Views/Server/ServerIndex.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 9684,
+      "sha256": "4a28d111f6ce04b062425aa061c5a0c0c421f82f55217f65e5591814a7b72f47"
+    },
+    {
+      "path": "bundleconfig.json",
+      "roles": [
+        "configuration"
+      ],
+      "bytes": 12673,
+      "sha256": "79c5f21bc99cfdc2465331741ed2227ba0b5ebc3f62117e67367edbeadd24cc7"
+    },
+    {
+      "path": "Controllers/BaseController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 6176,
+      "sha256": "ab3e1a5fd95500ad3336491f55bd6bb0bca832f83b243eb0750a29ca4c3ec950"
+    },
+    {
+      "path": "Controllers/FileController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 1494,
+      "sha256": "882c4f1b53c6aa8f25e983ea893bc5509f2ca0c7f8d67fbbdd1f600a4e077451"
+    },
+    {
+      "path": "Controllers/HomeController.cs",
+      "roles": [
+        "route-and-response-contract"
+      ],
+      "bytes": 17039,
+      "sha256": "54b077eb3db1a7bce5fccfac8386d76eb5ad827dd68bfa1855f9ae047974f554"
+    },
+    {
+      "path": "Startup.cs",
+      "roles": [
+        "configuration"
+      ],
+      "bytes": 5496,
+      "sha256": "919c5b47562cb720152ad4b37f83ff03b2fbeb1113c6409c47a0f2b4cf78b893"
+    },
+    {
+      "path": "Views/_ViewImports.cshtml",
+      "roles": [
+        "razor-context"
+      ],
+      "bytes": 331,
+      "sha256": "875d601deca386d7f7c3be9f0b4e3ac9c29a1340af890ccbac82f37acabb0e70"
+    },
+    {
+      "path": "Views/_ViewStart.cshtml",
+      "roles": [
+        "razor-context"
+      ],
+      "bytes": 32,
+      "sha256": "f6dceb9e6258ad80525250b5faf8454ab7688b0f5d58a253529149f42d4ec50c"
+    },
+    {
+      "path": "Views/Home/Error.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 19,
+      "sha256": "333c2d3b365232f5920fd3afa275255e47f21a7ef58159d3e503706a1db0f362"
+    },
+    {
+      "path": "Views/Home/Index.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 10473,
+      "sha256": "e7c44c946256a01922205d63a2b2a85385956fd155d4e1dd5125b5ee23b79c2e"
+    },
+    {
+      "path": "Views/Home/Login.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 5630,
+      "sha256": "8dcfcb60624c9bc9d616381eeb0c0ff0e3a9dbfdeaca4bf013fa01b9775ff3d1"
+    },
+    {
+      "path": "Views/Home/NoPermission.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 6824,
+      "sha256": "a65b41571e52aea04aeee84cbc2853add08749d34e40df689d7e3c6f5d70bd62"
+    },
+    {
+      "path": "Views/Home/Skin.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 7724,
+      "sha256": "6f51b08b3c022e2277c82bf5c9c0dab16ab6344267eff7a3f0d1891d19bce1aa"
+    },
+    {
+      "path": "Views/Home/Welcome.cshtml",
+      "roles": [
+        "application-view"
+      ],
+      "bytes": 9520,
+      "sha256": "509023dc482d56b09879090f87949173c27474584d0fa3bbfd9b1aa5c315ad02"
+    },
+    {
+      "path": "Views/Shared/_Form.cshtml",
+      "roles": [
+        "shared-layout"
+      ],
+      "bytes": 1765,
+      "sha256": "526261a28e9affc28c4173db59486e053b218120f8d700a3165143d15fc0cfc9"
+    },
+    {
+      "path": "Views/Shared/_FormGray.cshtml",
+      "roles": [
+        "shared-layout"
+      ],
+      "bytes": 992,
+      "sha256": "500296eac6e92f662a091f079786e45332dc8e2e5a2ce1c8052a8cd21d089600"
+    },
+    {
+      "path": "Views/Shared/_FormWhite.cshtml",
+      "roles": [
+        "shared-layout"
+      ],
+      "bytes": 993,
+      "sha256": "cc25b9e42a9af1a3b1b20b41d0a6fa0ce30e802b6b4fc9c451d7481af328734c"
+    },
+    {
+      "path": "Views/Shared/_Index.cshtml",
+      "roles": [
+        "shared-layout"
+      ],
+      "bytes": 2341,
+      "sha256": "9d071633705c9590f78cf49d78792f224902f98cfa5728eef80b9e8341c5b98e"
+    },
+    {
+      "path": "Views/Shared/_Layout.cshtml",
+      "roles": [
+        "shared-layout"
+      ],
+      "bytes": 2624,
+      "sha256": "3f7cefadbc44c9a19d4333377ba45c76e3fd40de1ac91316db8e4f032a07b5e0"
+    },
+    {
+      "path": "wwwroot/favicon.ico",
+      "roles": [
+        "view-resource"
+      ],
+      "bytes": 9662,
+      "sha256": "7e6a36c7022a829dd3e2f3c334b7b3d8ea0434973a3b35e3c34fdec70645c14e"
+    },
+    {
+      "path": "wwwroot/image/demo_1.jpg",
+      "roles": [
+        "image-not-directly-referenced"
+      ],
+      "bytes": 93657,
+      "sha256": "438e6c6ecfc6b1c4ffd5d4655633719a95e60e9abffe860e8c5c7a6916a737f8"
+    },
+    {
+      "path": "wwwroot/image/demo_2.png",
+      "roles": [
+        "image-not-directly-referenced"
+      ],
+      "bytes": 119686,
+      "sha256": "4381593a3e6132e9c12deb737e663c120e3cac7684870abd9c04a86a3a6b9d62"
+    },
+    {
+      "path": "wwwroot/image/demo_3.png",
+      "roles": [
+        "image-not-directly-referenced"
+      ],
+      "bytes": 72479,
+      "sha256": "b31f6ebcf95e5f2d8950abb4ec7ed840c05014c931b81dec93df964ec414b5a9"
+    },
+    {
+      "path": "wwwroot/image/demo_4.png",
+      "roles": [
+        "image-not-directly-referenced"
+      ],
+      "bytes": 86533,
+      "sha256": "bec32c3d6781ed8d632d52d40159ec905ceee8d77ed69c281affaa5b6dc37408"
+    },
+    {
+      "path": "wwwroot/image/locked.png",
+      "roles": [
+        "image-not-directly-referenced"
+      ],
+      "bytes": 1132,
+      "sha256": "5d49f096f9957f3b969cdf922469092b26550ec5cfe9c78a86515460c4230cd7"
+    },
+    {
+      "path": "wwwroot/image/login-background.jpg",
+      "roles": [
+        "css-resource",
+        "image-not-directly-referenced"
+      ],
+      "bytes": 207897,
+      "sha256": "bb7863bb617594d6dc1724eaf7180b01a54e8f60d37c78e9f2dd23535936fd62"
+    },
+    {
+      "path": "wwwroot/image/pay.png",
+      "roles": [
+        "image-not-directly-referenced"
+      ],
+      "bytes": 31503,
+      "sha256": "ffdc0c881e2dbe3b4343ca066e8cfdfff97d1fd4d77e06e0c9a33d0686123aa4"
+    },
+    {
+      "path": "wwwroot/image/portrait.png",
+      "roles": [
+        "referenced-image",
+        "view-resource"
+      ],
+      "bytes": 69831,
+      "sha256": "dd76c4ff119af4c666183101bf51877242656df5208cf932564fcc4ee0d8f205"
+    },
+    {
+      "path": "wwwroot/image/totoro.jpg",
+      "roles": [
+        "image-not-directly-referenced"
+      ],
+      "bytes": 38346,
+      "sha256": "b6f99ea27c23a45e48f173c2f3198cd35e10bc1c6a18a1a6fecb3e7b0fc26e27"
+    },
+    {
+      "path": "wwwroot/image/user.png",
+      "roles": [
+        "image-not-directly-referenced"
+      ],
+      "bytes": 1106,
+      "sha256": "09bbf9c144222134ee6d4f28b25d4b846f8c099d72c4360c7998bfd89715eb45"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.table/1.12.0/bootstrap-table.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 7234,
+      "sha256": "c7f663b14ac7149fd1e885b77c5eeb403c79690de09dbed49573155c1ef8b9ef"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.table/1.12.0/bootstrap-table.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 117587,
+      "sha256": "4d44da8881d23a8b7fa80b43b2a4c1b4ea29130c67277adbf0805ad82e15d6e7"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.table/1.12.0/bootstrap-table.min.css",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 5808,
+      "sha256": "7c96297efa62a5231dc7d8d355499b4e8105a5c391ff98be6f2d2e56f07b6805"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.table/1.12.0/bootstrap-table.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 62550,
+      "sha256": "5b6ae64a870f29fee51ee087d0bd5621caa1c585e8a2e1b58d8d6e7c93ce59de"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.table/1.12.0/extensions/mobile/bootstrap-table-mobile.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 4110,
+      "sha256": "4269ad3d05156ce3f6263ac270b4f83e3cf966a6ce73902078a2cdd1a35e45bb"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.table/1.12.0/locale/bootstrap-table-zh-CN.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 1400,
+      "sha256": "e5cc820c7bd8c4a53452b5a5015c30c8f2d9fa6235e91dc3ac564a4f588c2f69"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput-typeahead.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 975,
+      "sha256": "aaf3b3849795132f0e5ba70bd71fbd2ec6ea2a9f30844ae46cd9ce1b3a48e6de"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 1665,
+      "sha256": "b21f2f0e3d1de7ab861b820ff2f79ece3752bc63c037cb712e10685a4e86ba2a"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 22300,
+      "sha256": "0a88b66b1068a6c7ae0da8802635ce6761e0803e67c2dc09f905ad3c81004a63"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.css",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 1850,
+      "sha256": "ee9742f122dbd73c9f7c4f1c82040051dbf5dd108b23d827551b33cba0d72749"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 9312,
+      "sha256": "8bad871dfe3fb173730032b997b69561a192bf4a2329617dd31b1ad31edc1bec"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.treetable/1.0/bootstrap-treetable.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 1635,
+      "sha256": "5d0116fcf1d7eeb906339f04d715965982cbb053894cfab4d7a568ecd0d94720"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.treetable/1.0/bootstrap-treetable.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 35152,
+      "sha256": "fe16e1c7508b0fa7124464ea87c6197445d4468589effaa9b117f72ea5618040"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.treetable/1.0/bootstrap-treetable.min.css",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 1564,
+      "sha256": "e75a4f80ed4c0bda965f88a14d14720eef1977c5f99f75d9051afe7dfc234150"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap.treetable/1.0/bootstrap-treetable.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 12940,
+      "sha256": "bc6437abe0f2904c7223d31538c338be77f4adcf40999d334bab5b5cb365b6c8"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/css/bootstrap-theme.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 26132,
+      "sha256": "c4ea52f9efdd111f33ef6c3eaabc8289e386cac408f1c10b015b773071b4a616"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/css/bootstrap.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 145967,
+      "sha256": "56f40447d34241233da77f495be2349cccbe11dd0a7d1c12c0a4e78647e6df55"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/css/bootstrap.min.css",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 120843,
+      "sha256": "ad85fc89e7b15497ec544c4f7b19d0aa825fbccefb5164ec775536018ab94178"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/fonts/glyphicons-halflings-regular.eot",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 20127,
+      "sha256": "13634da87d9e23f8c3ed9108ce1724d183a39ad072e73e1b3d8cbf646d2d0407"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/fonts/glyphicons-halflings-regular.svg",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 108738,
+      "sha256": "42f60659d265c1a3c30f9fa42abcbb56bd4a53af4d83d316d6dd7a36903c43e5"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/fonts/glyphicons-halflings-regular.ttf",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 45404,
+      "sha256": "e395044093757d82afcb138957d06a1ea9361bdcf0b442d06a18a8051af57456"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/fonts/glyphicons-halflings-regular.woff",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 23424,
+      "sha256": "a26394f7ede100ca118eff2eda08596275a9839b959c226e15439557a5a80742"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/fonts/glyphicons-halflings-regular.woff2",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 18028,
+      "sha256": "fe185d11a49676890d47bb783312a0cda5a44c4039214094e7957b4c040ef11c"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/js/bootstrap.dropdown.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 5749,
+      "sha256": "c6e60596216e2f566c69b81c409d0c0ee822ebe985ed94d16a054a72137c1420"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/js/bootstrap.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 69707,
+      "sha256": "0abe8deb334de1ba743b04d0399e99eba336afed9da72fc4c0a302c99f9238c8"
+    },
+    {
+      "path": "wwwroot/lib/bootstrap/3.3.7/js/bootstrap.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 39925,
+      "sha256": "d42686017161051256aff9fc880ce7f64625f7e8ac01f12fe5bd7b5c6a5ed19b"
+    },
+    {
+      "path": "wwwroot/lib/cropbox/1.0/cropbox.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 2880,
+      "sha256": "9a574539d12d485199b81b8f9055a84b2fdf1a1b719e82b120da671778702d6a"
+    },
+    {
+      "path": "wwwroot/lib/cropbox/1.0/cropbox.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 4914,
+      "sha256": "52700ae12429cc0c2b3a52e9c1a62b2f01676f6a49e58b626cff3560f1f4f6cd"
+    },
+    {
+      "path": "wwwroot/lib/cropbox/1.0/cropbox.min.css",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 1895,
+      "sha256": "1bb7f01eb115737fe864f3c7a44dbefa3b81a12d73a464f680789edaa5d4a9e5"
+    },
+    {
+      "path": "wwwroot/lib/cropbox/1.0/cropbox.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 2172,
+      "sha256": "f54dc6593f6e03f14e9e54398799dbb49f3b41958106a54364957eac1ec5ee3c"
+    },
+    {
+      "path": "wwwroot/lib/fileinput/5.0.3/css/fileinput.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 11410,
+      "sha256": "dfc9a64c0b43a9e160c1d4448bd0e43b1c208090640b4357394c44372983f44a"
+    },
+    {
+      "path": "wwwroot/lib/fileinput/5.0.3/css/fileinput.min.css",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 9256,
+      "sha256": "b0d851be319dbc26f29e37f4344435e06174e41397c6bd877743e9b87adf6925"
+    },
+    {
+      "path": "wwwroot/lib/fileinput/5.0.3/img/loading-sm.gif",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 2670,
+      "sha256": "84b11496418cc9cb300b44f9d331580dce32229b8d624f542fb1ab4a02ea9b04"
+    },
+    {
+      "path": "wwwroot/lib/fileinput/5.0.3/img/loading.gif",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 847,
+      "sha256": "abb2c87444ef9f0ad7ff70d880ab21728e26380949753c630fa1831fe62b8026"
+    },
+    {
+      "path": "wwwroot/lib/fileinput/5.0.3/js/fileinput.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 261785,
+      "sha256": "aa2932ed89f23b9159e0ece41ca258c94da6472d314f1edb02cc5a06745bda6d"
+    },
+    {
+      "path": "wwwroot/lib/fileinput/5.0.3/js/fileinput.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 122245,
+      "sha256": "908f90df8490e51e9107c7fe12bad2a597fab5633dbc58a2f0c16a9a7b1a2279"
+    },
+    {
+      "path": "wwwroot/lib/fileinput/5.0.3/js/locales/zh.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 5352,
+      "sha256": "8ab0bbbda159960834c58fb2dd7dc5148d6b03f851b7ec373c6d5c1af17e23f5"
+    },
+    {
+      "path": "wwwroot/lib/fontawesome/4.7.0/css/font-awesome.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 37414,
+      "sha256": "36e0a7e08bee65774168528938072c536437669c1b7458ac77976ec788e4439c"
+    },
+    {
+      "path": "wwwroot/lib/fontawesome/4.7.0/css/fontawesome.min.css",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 29641,
+      "sha256": "dcd079fb9d98cf22eba1d20474d42cffea344570cd66c9e4848e2d5df229b2bd"
+    },
+    {
+      "path": "wwwroot/lib/fontawesome/4.7.0/fonts/fontawesome-webfont.eot",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 165742,
+      "sha256": "7bfcab6db99d5cfbf1705ca0536ddc78585432cc5fa41bbd7ad0f009033b2979"
+    },
+    {
+      "path": "wwwroot/lib/fontawesome/4.7.0/fonts/fontawesome-webfont.svg",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 444379,
+      "sha256": "ad6157926c1622ba4e1d03d478f1541368524bfc46f51e42fe0d945f7ef323e4"
+    },
+    {
+      "path": "wwwroot/lib/fontawesome/4.7.0/fonts/fontawesome-webfont.ttf",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 165548,
+      "sha256": "aa58f33f239a0fb02f5c7a6c45c043d7a9ac9a093335806694ecd6d4edc0d6a8"
+    },
+    {
+      "path": "wwwroot/lib/fontawesome/4.7.0/fonts/fontawesome-webfont.woff",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 98024,
+      "sha256": "ba0c59deb5450f5cb41b3f93609ee2d0d995415877ddfa223e8a8a7533474f07"
+    },
+    {
+      "path": "wwwroot/lib/fontawesome/4.7.0/fonts/fontawesome-webfont.woff2",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 77160,
+      "sha256": "2adefcbc041e7d18fcf2d417879dc5a09997aa64d675b7a3c4b6ce33da13f3fe"
+    },
+    {
+      "path": "wwwroot/lib/highlight/9.13.1/css/vs.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 837,
+      "sha256": "21a874f8da74847aa749baf4a7fb240e8f38aea2339ea39debee22c8361ccf91"
+    },
+    {
+      "path": "wwwroot/lib/highlight/9.13.1/css/vs.min.css",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 608,
+      "sha256": "7c3dce1607d3ddcbf8187e7535c612b181a58998277a158008e5014840841c2d"
+    },
+    {
+      "path": "wwwroot/lib/highlight/9.13.1/highlight.pack.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 47285,
+      "sha256": "1ddc1581615861da89dc882a52643b06b8c95b885c300b144f736218f8a8c365"
+    },
+    {
+      "path": "wwwroot/lib/icheck/1.0.2/icheck.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 14136,
+      "sha256": "2e77b1a401fa0dcd760a32f99d5bc5ea4c1ca373780acf8086d9b47e69f21a18"
+    },
+    {
+      "path": "wwwroot/lib/icheck/1.0.2/icheck.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 5062,
+      "sha256": "b55d81fb9a090d5346b1a771008a23929aab09884d896462895546a241aaa806"
+    },
+    {
+      "path": "wwwroot/lib/icheck/1.0.2/skins/custom.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 1552,
+      "sha256": "6f9aba0d96976a13581591bf7355c9e702df000d22d25f8cc89507afb30ab7fa"
+    },
+    {
+      "path": "wwwroot/lib/icheck/1.0.2/skins/custom.min.css",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 1034,
+      "sha256": "17a2b0bbca8f31975cb88550577a7bd73da845e9c5d06cc2964e23ec5da1e0e5"
+    },
+    {
+      "path": "wwwroot/lib/icheck/1.0.2/skins/minimal/blue.png",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 1132,
+      "sha256": "554d1c81ca2ad1da94f15b8d6446069244cbcb4d3d11028cd30940eb2d437b13"
+    },
+    {
+      "path": "wwwroot/lib/imageupload/1.0/css/imgup.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 2719,
+      "sha256": "dd98641ea0ef53ec52bf8b674fac1da9708f65f7b775e5972c73aad410d69b1d"
+    },
+    {
+      "path": "wwwroot/lib/imageupload/1.0/css/imgup.min.css",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 1754,
+      "sha256": "1db1834470e5f597d759d80d7cf7baf8e1e7c50697cb236e537f2f354bc1fbe2"
+    },
+    {
+      "path": "wwwroot/lib/imageupload/1.0/img/loading.gif",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 1787,
+      "sha256": "16ea0cf66d51efdbbc2a62b11ab0419fa72fb3320844f1d0d710480245ac9925"
+    },
+    {
+      "path": "wwwroot/lib/imageupload/1.0/js/imgup.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 9528,
+      "sha256": "194e5af3df6c149acbac77bc6e26960a7ea70f08c07ebdc8383a1ce78f0c5d0c"
+    },
+    {
+      "path": "wwwroot/lib/imageupload/1.0/js/imgup.min.js",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 5637,
+      "sha256": "a7489e6082ca9d9ad97df818dc68825f89203013d15846c903934b6aede5fc09"
+    },
+    {
+      "path": "wwwroot/lib/imageupload/1.0/js/preview.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 4438,
+      "sha256": "598a31a5ab9ec29c196e2426deefd38aeed090771c562155f2ce2f7714ad9c93"
+    },
+    {
+      "path": "wwwroot/lib/jquery.blockui/2.7/jquery.blockUI.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 19966,
+      "sha256": "a106b0f8926e51c250f5055831c1673f12020d3fa1bfcfa4bb14f614dcd31a17"
+    },
+    {
+      "path": "wwwroot/lib/jquery.cookie/1.4.1/jquery.cookie.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 3120,
+      "sha256": "fc8de13937a24ec06ae02b19e0b5a6745b9c7c06eec9346dbc9329ff19369c8e"
+    },
+    {
+      "path": "wwwroot/lib/jquery.fullscreen/1.2/jquery.fullscreen.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 3625,
+      "sha256": "76231abd35ebf569936f570ea49f356245b47f8e42ca615d723b3ef4dd9a18ce"
+    },
+    {
+      "path": "wwwroot/lib/jquery.layout/1.4.4/jquery.layout-latest.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 3737,
+      "sha256": "78d56bb40ee993e5176e0f132b5b724c6710c6539651f56aa83e18dc231229da"
+    },
+    {
+      "path": "wwwroot/lib/jquery.layout/1.4.4/jquery.layout-latest.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 285957,
+      "sha256": "c3359c1ff4ef903076173f46c777b15a70b4970bca510dbcba45b2aa2ba794b2"
+    },
+    {
+      "path": "wwwroot/lib/jquery.layout/1.4.4/jquery.layout-latest.min.css",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 2973,
+      "sha256": "36725c7c219faaa00122761a670c35f1cd3f5f953118ba8f433f3ae3d96ccf75"
+    },
+    {
+      "path": "wwwroot/lib/jquery.layout/1.4.4/jquery.layout-latest.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 68138,
+      "sha256": "b9636df41a35e6c7487ba362f409b7ddc2a562a9604a4ab32e0b2f388221467c"
+    },
+    {
+      "path": "wwwroot/lib/jquery.metisMenu/1.1.3/jquery.metisMenu.js",
+      "roles": [
+        "view-resource"
+      ],
+      "bytes": 3985,
+      "sha256": "f3543ab3debb16ac74650308ae59af102c847bc1458558d697d06a425df091fa"
+    },
+    {
+      "path": "wwwroot/lib/jquery.slimscroll/1.3.8/jquery.slimscroll.min.js",
+      "roles": [
+        "view-resource"
+      ],
+      "bytes": 4688,
+      "sha256": "0bf7d2ebd4ea2c05a8b30f436081fe97e218d19d1363b19a7c39174e27f0f9f6"
+    },
+    {
+      "path": "wwwroot/lib/jquery.smartwizard/4.0.1/css/smart_wizard_theme_arrows.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 5040,
+      "sha256": "d76f2e93369115c9c41bce6656c2bd56762f074bc419ab222edf53d54ba11001"
+    },
+    {
+      "path": "wwwroot/lib/jquery.smartwizard/4.0.1/css/smart_wizard.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 4331,
+      "sha256": "40b8c2808ad23b83621fdd1f0ca6693e5da681529f4924b02578d6ea7665b1da"
+    },
+    {
+      "path": "wwwroot/lib/jquery.smartwizard/4.0.1/css/smart_wizard.min.css",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 30009,
+      "sha256": "a6eca84abbf7e2ad9f545446e611712f34dc6bd694bf0152f16a264f4f654262"
+    },
+    {
+      "path": "wwwroot/lib/jquery.smartwizard/4.0.1/css/smart_wizard.min.js",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 9610,
+      "sha256": "4df93113155bfeae4c4d9913d10ef1fd4c4cc5e61f8713c9260985729defd6d1"
+    },
+    {
+      "path": "wwwroot/lib/jquery.smartwizard/4.0.1/js/jquery.smartWizard.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 21958,
+      "sha256": "7da12e36e180e8e085e0b4749b6a528ec4d39db0dbd6f7afb561595accf74295"
+    },
+    {
+      "path": "wwwroot/lib/jquery.ui/1.12.1/highlight.pack.min.js",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 47250,
+      "sha256": "c6dbe0dbfa61e4bf8fb3225c53afddd2d6596fd8db467ae4666e7e8f9423f039"
+    },
+    {
+      "path": "wwwroot/lib/jquery.ui/1.12.1/jquery-ui.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 37326,
+      "sha256": "a7ac54f58ba507b13621ceb6fcf5fe879f5ac9bdcf049d16153110c6ad048c7c"
+    },
+    {
+      "path": "wwwroot/lib/jquery.ui/1.12.1/jquery-ui.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 520714,
+      "sha256": "4f455eb2ddf2094ee969f470f6bfac7adb4c057e8990a374e9da819e943c777d"
+    },
+    {
+      "path": "wwwroot/lib/jquery.ui/1.12.1/jquery-ui.min.css",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 32007,
+      "sha256": "270e6b5de09af3d6ffae72ad9e970252ba82829adbce44384ffb68c420367e70"
+    },
+    {
+      "path": "wwwroot/lib/jquery.ui/1.12.1/jquery-ui.min.js",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 263104,
+      "sha256": "b585836631b3bc3d47524dbfb0cd85d8b69e4667c21ed0ef7e2cfee95c8c4f12"
+    },
+    {
+      "path": "wwwroot/lib/jquery.validation/1.14.0/jquery.validate.extend.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 4649,
+      "sha256": "55ae5b9db49ca0100105711415c7a1a4fd228995cbf51f0a31f2579c5e365335"
+    },
+    {
+      "path": "wwwroot/lib/jquery.validation/1.14.0/jquery.validate.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 42782,
+      "sha256": "d965059c6be08e0a3f4eb4ec6c389ae1c58ed679ecf05714615cab05cb35c96b"
+    },
+    {
+      "path": "wwwroot/lib/jquery.validation/1.14.0/jquery.validate.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 25034,
+      "sha256": "0c22d4bbc144fa958f19b90b53c5b7ab8d6ef4a0cbd7cb0d44485c9a528fd3ba"
+    },
+    {
+      "path": "wwwroot/lib/jquery.validation/1.14.0/localization/messages_zh.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 1205,
+      "sha256": "01da4c722a9ee525fa0d20a267f09538018838ccde08db51c4760cac88d20d97"
+    },
+    {
+      "path": "wwwroot/lib/jquery/2.1.4/jquery.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 247597,
+      "sha256": "b2215cce5830e2350b9d420271d9bd82340f664c3f60f0ea850f7e9c0392704e"
+    },
+    {
+      "path": "wwwroot/lib/jquery/2.1.4/jquery.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 97758,
+      "sha256": "b3121952de792f4e6425b1121a6958b5b8f975cccabe4fc7ca1a36f256c1f82a"
+    },
+    {
+      "path": "wwwroot/lib/laydate/5.0.9/laydate.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 27378,
+      "sha256": "37b6d7691037c158ceddf0f41de9e66f68aa65380a8899a3280e6dff000d510a"
+    },
+    {
+      "path": "wwwroot/lib/laydate/5.0.9/laydate.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 27338,
+      "sha256": "b06e066e7c0c2a9c8196dedf7262fb385d3b397bbcb48b9561a97de17f4fba81"
+    },
+    {
+      "path": "wwwroot/lib/laydate/5.0.9/theme/default/font/iconfont.eot",
+      "roles": [
+        "css-resource",
+        "plugin-theme-resource"
+      ],
+      "bytes": 2456,
+      "sha256": "8cc760f5cc7e7b51d3744091b05979eafbc40073a152b6237cc64527b90fb965"
+    },
+    {
+      "path": "wwwroot/lib/laydate/5.0.9/theme/default/font/iconfont.svg",
+      "roles": [
+        "css-resource",
+        "plugin-theme-resource"
+      ],
+      "bytes": 3074,
+      "sha256": "df785e5eef1f6b534b24a20aed1b3e676d87dc02e67223c5a1b10805547afd83"
+    },
+    {
+      "path": "wwwroot/lib/laydate/5.0.9/theme/default/font/iconfont.ttf",
+      "roles": [
+        "css-resource",
+        "plugin-theme-resource"
+      ],
+      "bytes": 2272,
+      "sha256": "88347a580b72fef79f247e5dcffe4da1c9d08c5d33c338ee9235b72fc9b1a85b"
+    },
+    {
+      "path": "wwwroot/lib/laydate/5.0.9/theme/default/font/iconfont.woff",
+      "roles": [
+        "css-resource",
+        "plugin-theme-resource"
+      ],
+      "bytes": 1492,
+      "sha256": "2dc4a9c1987fbe57475fb75b469581204a10bd777cf9f017f67aab1ab180a6cf"
+    },
+    {
+      "path": "wwwroot/lib/laydate/5.0.9/theme/default/laydate.css",
+      "roles": [
+        "plugin-theme-resource"
+      ],
+      "bytes": 7979,
+      "sha256": "46ea4ae323cf57b11b7a0c11a701e40490268825f35e20725505ae0d7833a06b"
+    },
+    {
+      "path": "wwwroot/lib/layer/3.1.1/layer.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 39409,
+      "sha256": "4a182a2bb13ef91cf4a9147927176a186f681c9c0459e932f5579183a0062f94"
+    },
+    {
+      "path": "wwwroot/lib/layer/3.1.1/layer.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 22154,
+      "sha256": "be3148a28e7ef9016d1abac827e16c03732ca66296fb65e1cace9f34371991b5"
+    },
+    {
+      "path": "wwwroot/lib/layer/3.1.1/theme/default/icon-ext.png",
+      "roles": [
+        "css-resource",
+        "plugin-theme-resource"
+      ],
+      "bytes": 5911,
+      "sha256": "e2e7a838c43d0a9a9ffc179fc7bd41435883df6f5103a45dc77db4d30c8825e2"
+    },
+    {
+      "path": "wwwroot/lib/layer/3.1.1/theme/default/icon.png",
+      "roles": [
+        "css-resource",
+        "plugin-theme-resource"
+      ],
+      "bytes": 11493,
+      "sha256": "99942159547fc45a02ddeb5af9570b6c870b18c36f83fd53ccb7c0644d346c89"
+    },
+    {
+      "path": "wwwroot/lib/layer/3.1.1/theme/default/layer.css",
+      "roles": [
+        "plugin-theme-resource"
+      ],
+      "bytes": 15585,
+      "sha256": "50f84673b465de561137a15917383d4e4111df2126b2fff46dcae8529fd81266"
+    },
+    {
+      "path": "wwwroot/lib/layer/3.1.1/theme/default/loading-0.gif",
+      "roles": [
+        "css-resource",
+        "plugin-theme-resource"
+      ],
+      "bytes": 5793,
+      "sha256": "07236f6814a40623bab43f2043860c97678bc7deedbf06feff92f0d6e6673bf5"
+    },
+    {
+      "path": "wwwroot/lib/layer/3.1.1/theme/default/loading-1.gif",
+      "roles": [
+        "css-resource",
+        "plugin-theme-resource"
+      ],
+      "bytes": 701,
+      "sha256": "7c6380e9985c8e4982f41f8dba64d6b1c4a7997d0aa635d9f4bb7643ab815248"
+    },
+    {
+      "path": "wwwroot/lib/layer/3.1.1/theme/default/loading-2.gif",
+      "roles": [
+        "css-resource",
+        "plugin-theme-resource"
+      ],
+      "bytes": 1787,
+      "sha256": "16ea0cf66d51efdbbc2a62b11ab0419fa72fb3320844f1d0d710480245ac9925"
+    },
+    {
+      "path": "wwwroot/lib/layer/3.1.1/theme/moon/default.png",
+      "roles": [
+        "css-resource",
+        "plugin-theme-resource"
+      ],
+      "bytes": 7563,
+      "sha256": "d5b83dd6cc79ac050c98db7a296dcdb71c4baf66f7921b4b6e1917fd59ef0750"
+    },
+    {
+      "path": "wwwroot/lib/layer/3.1.1/theme/moon/style.css",
+      "roles": [
+        "plugin-theme-resource"
+      ],
+      "bytes": 3562,
+      "sha256": "e1ddb8c2daa9217629e1903686738c8323b840bfcb49a731aa47ea28ae481cdd"
+    },
+    {
+      "path": "wwwroot/lib/report/echarts/china.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 62619,
+      "sha256": "d4203ad5bd03f5eaa862a5d2aaf1880e4333393c0d06111f273866d932e585e0"
+    },
+    {
+      "path": "wwwroot/lib/report/echarts/echarts.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 2982349,
+      "sha256": "0e064e329bf7c7fb079743a917c6c9e3e189803d498e86167067559b38bc5e6c"
+    },
+    {
+      "path": "wwwroot/lib/report/echarts/echarts.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 839617,
+      "sha256": "a262dc86210a6630a1d159c02f86f61b68f439a4b0df4a4bb694352d731c0706"
+    },
+    {
+      "path": "wwwroot/lib/report/peity/jquery.peity.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 9030,
+      "sha256": "3403dbf1c7b5e2f5bf1b3ebe4d5fd4117261e0045b23a65e14d5b842b67c2fe1"
+    },
+    {
+      "path": "wwwroot/lib/report/peity/jquery.peity.min.js",
+      "roles": [
+        "bundle-output"
+      ],
+      "bytes": 3619,
+      "sha256": "3da9edf78efb09da02d1dc78be4c3d710ebc3a6d798b6f89706f9305506519d2"
+    },
+    {
+      "path": "wwwroot/lib/select2/4.0.6/css/select2.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 19143,
+      "sha256": "a8c5eee150dc7f7fbcbb569f0aaf1829b1203ed950e450b1caf32f94b8515143"
+    },
+    {
+      "path": "wwwroot/lib/select2/4.0.6/css/select2.min.css",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 15154,
+      "sha256": "d78aa17e962aefcf90c988d4e0c609f80b015d0af48b5b15a6f745e51c6536a0"
+    },
+    {
+      "path": "wwwroot/lib/select2/4.0.6/js/select2.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 210034,
+      "sha256": "04956fac04efaac56aafb9f73fc2e428618112ed387eb81dd5906f6fee88a9b4"
+    },
+    {
+      "path": "wwwroot/lib/select2/4.0.6/js/select2.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 68676,
+      "sha256": "a57098ead743008260fa3784b6a297cb4f50b7368519892c1fa1dac0d3b9c491"
+    },
+    {
+      "path": "wwwroot/lib/zTree/v3/css/metroStyle/img/line_conn.png",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 933,
+      "sha256": "0a83fe3320d2d0be2c8d36cd7bfcb39ecc0be75c15c6c223c5dab3d4d18f8bde"
+    },
+    {
+      "path": "wwwroot/lib/zTree/v3/css/metroStyle/img/loading.gif",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 381,
+      "sha256": "f627b902dbb57bcca1ab7ccba32a015c45d2c84cae719ca5626993d7ced3c428"
+    },
+    {
+      "path": "wwwroot/lib/zTree/v3/css/metroStyle/img/metro.gif",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 4679,
+      "sha256": "1165e632373623ac0f0b0b40e09b9c814525e3b879af26b697ce91bd98ca5d60"
+    },
+    {
+      "path": "wwwroot/lib/zTree/v3/css/metroStyle/img/metro.png",
+      "roles": [
+        "css-resource"
+      ],
+      "bytes": 5283,
+      "sha256": "a4d0bfedbc0f97801ea035b3cfe4137035db5ce430521a2fa57fe452bd6eb2a3"
+    },
+    {
+      "path": "wwwroot/lib/zTree/v3/css/metroStyle/metroStyle.css",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 6578,
+      "sha256": "569d2c88d043ca7ebdb3652d76da87b819b671b5ac5cf7c5fef19326b660206c"
+    },
+    {
+      "path": "wwwroot/lib/zTree/v3/css/metroStyle/metroStyle.min.css",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 5917,
+      "sha256": "7c426a30c2643d33659bc67f280496637af9494ed1c2e467ff60369c0993b058"
+    },
+    {
+      "path": "wwwroot/lib/zTree/v3/js/jquery.ztree.all-3.5.js",
+      "roles": [
+        "bundle-input"
+      ],
+      "bytes": 121044,
+      "sha256": "23682b76b9d0dd25a9f0c533eb85ab207d3e6934a8f35d62bca6fee070f5750f"
+    },
+    {
+      "path": "wwwroot/lib/zTree/v3/js/ztree.min.js",
+      "roles": [
+        "bundle-output",
+        "view-resource"
+      ],
+      "bytes": 64961,
+      "sha256": "9af4cc9af127897bca89cf0fc3173e4dd38b7e43088bc2166fe8d3afc6ff16a5"
+    },
+    {
+      "path": "wwwroot/template/导入用户模板.xlsx",
+      "roles": [
+        "view-resource"
+      ],
+      "bytes": 10035,
+      "sha256": "d52f53c8a3db07de7171e7e75fe2ea05c00896fd1d0630e4f1983aae637e1481"
+    },
+    {
+      "path": "wwwroot/yisha/css/animate.css",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 66203,
+      "sha256": "49c388d627d292a4a1a12f8a8210033b119609962eaf3aab0f0c0fd232a04eb8"
+    },
+    {
+      "path": "wwwroot/yisha/css/login.css",
+      "roles": [
+        "first-party-style-or-script",
+        "view-resource"
+      ],
+      "bytes": 7417,
+      "sha256": "ae66f00bbd7b24ce1a5dc9093388c39e1fb115682140096aadc360f99790aff2"
+    },
+    {
+      "path": "wwwroot/yisha/css/skins.css",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 20791,
+      "sha256": "af835dd929373c63f9c6e3ea5126c12256a5a1c3a50ccd679002f82ad7b89bf5"
+    },
+    {
+      "path": "wwwroot/yisha/css/style.css",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 137339,
+      "sha256": "35bc796afea02348d2505842e2aa7066aaa46f59f2a2fcc4e3c13f8d573b8e8b"
+    },
+    {
+      "path": "wwwroot/yisha/css/style.min.css",
+      "roles": [
+        "bundle-output",
+        "generated-first-party-bundle",
+        "view-resource"
+      ],
+      "bytes": 224334,
+      "sha256": "a3f3fd9a1d147f1bd447b994488219dff285d0e28d6fe64db6164e210982b25b"
+    },
+    {
+      "path": "wwwroot/yisha/css/yisha.css",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 9525,
+      "sha256": "384613971cf1df2720e639ce33b41bd4cd17e85800529fe24316f91f956aeffb"
+    },
+    {
+      "path": "wwwroot/yisha/css/yisha.min.css",
+      "roles": [
+        "bundle-output",
+        "generated-first-party-bundle",
+        "view-resource"
+      ],
+      "bytes": 6940,
+      "sha256": "1e0d47814e126de9fed233d7e7c74db063ecc344eb4230c5026b3b862af7be69"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha-data.js",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 3530,
+      "sha256": "9df74c284d425402ef59cf8183dd63162a5596c8d502f6013b7c9078b491baf0"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha-data.min.js",
+      "roles": [
+        "bundle-output",
+        "generated-first-party-bundle",
+        "view-resource"
+      ],
+      "bytes": 1103,
+      "sha256": "3231b4c7d47bf63bcc1cb126a6a766cb9531df1e2be34f9838748ba2afca395c"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha-index.js",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 15858,
+      "sha256": "d1a346e12938b323913f0e0ff4a56208bd45dd27d120147ddf3607e23cc2aabb"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha-index.min.js",
+      "roles": [
+        "bundle-output",
+        "generated-first-party-bundle",
+        "view-resource"
+      ],
+      "bytes": 7337,
+      "sha256": "aca543dea238659ebe86ac44c28f66c4bb460deaa69d16b23dc90cca3ebc4443"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha-init.js",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 6667,
+      "sha256": "3d756a0e3cc196069a589a76c68cbf19fae498709fc073fa35e26a8bafb29ba6"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha-init.min.js",
+      "roles": [
+        "bundle-output",
+        "generated-first-party-bundle",
+        "view-resource"
+      ],
+      "bytes": 3192,
+      "sha256": "7b114c1835de4e865bff4325c3d65f15b41f69825097bba3b90b57ac2811f323"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha-jquery-bootstrap-table-plugin.js",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 3521,
+      "sha256": "e943396f9422652c6063a329f8ef56583be617b291b903637ff99873caa91c82"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha-jquery-bootstrap-treetable-plugin.js",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 1325,
+      "sha256": "c2216d3fd5467e3a2c09b0f411fa411b3cedeafa87d49e3d905277cd68e056b0"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha-jquery-ztree-plugin.js",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 7679,
+      "sha256": "1acbd63939e5209caa3026b9213d62f7b9e5b4fa01c0a3f672a0c4bd2097670e"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha-plugin.js",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 17906,
+      "sha256": "73f7226494d05857a7e2917190fde668548260f01471cc2754cde6849019be3b"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha.js",
+      "roles": [
+        "bundle-input",
+        "first-party-style-or-script"
+      ],
+      "bytes": 15496,
+      "sha256": "61204a41d31e53976824d58fa25ac31580b4da7ce47af17be51d0895aae88f9a"
+    },
+    {
+      "path": "wwwroot/yisha/js/yisha.min.js",
+      "roles": [
+        "bundle-output",
+        "generated-first-party-bundle",
+        "view-resource"
+      ],
+      "bytes": 12527,
+      "sha256": "1e7dd4e7feaa44a624cfcc764b9b1140ca2c5077e3dd6973b140457c7f5c7ce2"
+    }
+  ]
+}
